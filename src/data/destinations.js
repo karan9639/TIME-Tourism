@@ -1,0 +1,92 @@
+export const destinations = [
+  {
+    id: "india",
+    name: "India",
+    tagline: "A vast, mystical land of unforgettable experiences",
+    description:
+      "India is bound by strong traditions and colourful, vibrant cultures. It is a vast, mystical land which offers an array of unforgettable experiences and casts a magical spell on all visitors. From spectacular landscapes, wildlife, great architecture, warmth and traditional hospitality to the sun, sand and surf, India has it all.",
+    image: "/taj-mahal-india-luxury-travel-editorial-golden-hou.jpg",
+    heroImage: "/varanasi-ghats-sunrise-india-spiritual-travel-phot.jpg",
+    highlights: [
+      "Taj Mahal & Mughal Heritage",
+      "Royal Rajasthan Palaces",
+      "Kerala Backwaters",
+      "Himalayan Adventures",
+      "Wildlife Safaris",
+      "Spiritual Journeys",
+    ],
+    featured: true,
+  },
+  {
+    id: "nepal",
+    name: "Nepal",
+    tagline: "Snow-capped mountains and mystical monasteries",
+    description:
+      "Fulfill your sense of adventure in a land of snow-capped mountains and mystical monasteries. Situated between the vast expanses of India and China, Nepal has preserved its rich heritage, colourful cities, and unique landscapes. Anything from culture to trekking can be found in this exotic treasure.",
+    image: "/nepal-himalaya-mountains-luxury-travel-editorial-p.jpg",
+    heroImage: "/everest-base-camp-nepal-trekking-adventure-photogr.jpg",
+    highlights: [
+      "Everest Region Trekking",
+      "Kathmandu Valley Heritage",
+      "Buddhist Monasteries",
+      "Chitwan Wildlife",
+      "Mountain Flights",
+      "Cultural Immersion",
+    ],
+    featured: true,
+  },
+  {
+    id: "bhutan",
+    name: "Bhutan",
+    tagline: "The world's happiest country",
+    description:
+      'Known as "the world\'s happiest country" Bhutan has nurtured a sense of isolated grandeur. Cliffside monasteries await an increasing number of travellers who are discovering a land long hidden by the majestic Himalaya Mountains.',
+    image: "/bhutan-tigers-nest-monastery-luxury-travel-editori.jpg",
+    heroImage: "/paro-taktsang-bhutan-monastery-clouds-mountains.jpg",
+    highlights: [
+      "Tiger's Nest Monastery",
+      "Dzong Fortresses",
+      "Festival Experiences",
+      "Pristine Nature",
+      "Buddhist Culture",
+      "Sustainable Tourism",
+    ],
+    featured: true,
+  },
+  {
+    id: "sri-lanka",
+    name: "Sri Lanka",
+    tagline: "Tropical island paradise",
+    description:
+      "This tropical island paradise boasts spicy cuisine and cool watersports. Fill your days with oceanside cycling or trek through some of the most biodiverse forests anywhere in the world. Whether you seek colonial architecture, Buddhist temples, or Dutch forts you will find it in Sri Lanka.",
+    image: "/sri-lanka-sigiriya-rock-fortress-luxury-travel-edi.jpg",
+    heroImage: "/sri-lanka-tea-plantations-hills-luxury-travel-phot.jpg",
+    highlights: [
+      "Ancient Temples",
+      "Tea Country",
+      "Wildlife Safaris",
+      "Beach Retreats",
+      "Colonial Heritage",
+      "Whale Watching",
+    ],
+    featured: true,
+  },
+  {
+    id: "maldives",
+    name: "Maldives",
+    tagline: "White sand beaches and turquoise waters",
+    description:
+      "With 1,200 islands and beaches of white sand and luminous turquoise waters full of coral reefs and marine life, the Maldives attracts travelers looking to scuba dive, snorkel, spot dolphins, float in sparkling lagoons.",
+    image: "/maldives-overwater-villa-luxury-travel-editorial-s.jpg",
+    heroImage: "/maldives-underwater-coral-reef-diving-luxury-photo.jpg",
+    highlights: [
+      "Overwater Villas",
+      "Scuba Diving",
+      "Spa Retreats",
+      "Private Islands",
+      "Marine Life",
+      "Romantic Escapes",
+    ],
+    featured: true,
+  },
+]
