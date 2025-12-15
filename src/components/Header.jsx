@@ -8,11 +8,11 @@ const navLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
   { name: "Destinations", path: "/destinations" },
-  // { name: "Services", path: "/services" },
-  // { name: "Experiences", path: "/experiences" },
-  // { name: "MICE & Corporate", path: "/mice-corporate" },
-  // { name: "Partners", path: "/partners" },
-  // { name: "Contact", path: "/contact" },
+  { name: "Services", path: "/services" },
+  { name: "Experiences", path: "/experiences" },
+  { name: "MICE & Corporate", path: "/mice-corporate" },
+  { name: "Partners", path: "/partners" },
+  { name: "Contact", path: "/contact" },
 ]
 
 export default function Header() {
