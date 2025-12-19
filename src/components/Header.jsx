@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Link, useLocation } from "react-router-dom"
-import { Menu, X } from "lucide-react"
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -13,44 +13,52 @@ const navLinks = [
   { name: "MICE & Corporate", path: "/mice-corporate" },
   { name: "Partners", path: "/partners" },
   { name: "Contact", path: "/contact" },
-]
+];
+
+const LOGO_URL =
+  "https://res.cloudinary.com/dptxyo9dy/image/upload/v1766144775/TIME_-_Company-removebg-preview_cejuig.png";
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const location = useLocation()
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
-    setIsMobileMenuOpen(false)
-  }, [location])
+    setIsMobileMenuOpen(false);
+  }, [location]);
 
-  const isHome = location.pathname === "/"
+  const isHome = location.pathname === "/";
+  const isSolidHeader = isScrolled || !isHome;
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled || !isHome ? "bg-warm-white/95 backdrop-blur-md shadow-sm" : "bg-transparent"
+        isSolidHeader
+          ? "bg-warm-white/95 backdrop-blur-md shadow-sm"
+          : "bg-transparent"
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <span
-              className={`text-2xl font-serif font-semibold tracking-wider transition-colors duration-300 ${
-                isScrolled || !isHome ? "text-charcoal" : "text-white"
+          <Link to="/" className="flex items-center">
+            {/* If your logo is dark, the drop-shadow helps on transparent hero */}
+            <img
+              src={LOGO_URL}
+              alt="TIME"
+              className={`h-10 w-auto transition-all duration-300 ${
+                isSolidHeader
+                  ? "drop-shadow-none"
+                  : "drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]"
               }`}
-            >
-              TIME
-            </span>
+              loading="eager"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -60,8 +68,12 @@ export default function Header() {
                 key={link.path}
                 to={link.path}
                 className={`text-sm font-medium tracking-wide transition-colors duration-300 hover:text-terracotta-500 ${
-                  isScrolled || !isHome ? "text-charcoal" : "text-white/90 hover:text-white"
-                } ${location.pathname === link.path ? "text-terracotta-500" : ""}`}
+                  isSolidHeader
+                    ? "text-charcoal"
+                    : "text-white/90 hover:text-white"
+                } ${
+                  location.pathname === link.path ? "text-terracotta-500" : ""
+                }`}
               >
                 {link.name}
               </Link>
@@ -73,7 +85,7 @@ export default function Header() {
             <Link
               to="/contact"
               className={`px-6 py-2.5 text-sm font-medium tracking-wide transition-all duration-300 ${
-                isScrolled || !isHome
+                isSolidHeader
                   ? "bg-terracotta-500 text-white hover:bg-terracotta-600"
                   : "bg-white/20 text-white border border-white/40 hover:bg-white hover:text-charcoal"
               }`}
@@ -85,7 +97,9 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`lg:hidden p-2 transition-colors ${isScrolled || !isHome ? "text-charcoal" : "text-white"}`}
+            className={`lg:hidden p-2 transition-colors ${
+              isSolidHeader ? "text-charcoal" : "text-white"
+            }`}
             aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -105,7 +119,9 @@ export default function Header() {
               key={link.path}
               to={link.path}
               className={`text-lg font-medium py-3 border-b border-sand-200 transition-colors ${
-                location.pathname === link.path ? "text-terracotta-500" : "text-charcoal hover:text-terracotta-500"
+                location.pathname === link.path
+                  ? "text-terracotta-500"
+                  : "text-charcoal hover:text-terracotta-500"
               }`}
             >
               {link.name}
@@ -120,5 +136,5 @@ export default function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }

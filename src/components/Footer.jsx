@@ -1,5 +1,15 @@
-import { Link } from "react-router-dom"
-import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react"
+import { Link } from "react-router-dom";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  Phone,
+  MapPin,
+} from "lucide-react";
+
+const LOGO_URL =
+  "https://res.cloudinary.com/dptxyo9dy/image/upload/e_trim:10,f_auto,q_auto,h_56/v1766144775/TIME_-_Company-removebg-preview_cejuig.png";
 
 const footerLinks = {
   explore: [
@@ -19,7 +29,7 @@ const footerLinks = {
     { name: "Contact Us", path: "/contact" },
     { name: "Our Partners", path: "/partners" },
   ],
-}
+};
 
 export default function Footer() {
   return (
@@ -29,19 +39,42 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <h3 className="text-3xl font-serif font-semibold text-white mb-4">TIME</h3>
-            <p className="text-sand-300 text-sm leading-relaxed mb-6">
-              Tourism India Management Enterprise – Crafting extraordinary journeys across the Indian Subcontinent for
-              over 24 years.
+            <Link to="/" className="inline-flex items-center">
+              <span className="inline-flex items-center rounded-2xl bg-warm-white/90 px-4 py-2.5 ring-1 ring-white/10 shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
+                <img
+                  src={LOGO_URL}
+                  alt="TIME"
+                  className="h-10 w-auto object-contain"
+                  loading="eager"
+                />
+              </span>
+            </Link>
+
+            <p className="text-sand-300 text-sm leading-relaxed mb-6 mt-5">
+              Tourism India Management Enterprise – Crafting extraordinary
+              journeys across the Indian Subcontinent for over 24 years.
             </p>
+
             <div className="flex space-x-4">
-              <a href="#" className="text-sand-400 hover:text-terracotta-400 transition-colors" aria-label="Facebook">
+              <a
+                href="#"
+                className="text-sand-400 hover:text-terracotta-400 transition-colors"
+                aria-label="Facebook"
+              >
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-sand-400 hover:text-terracotta-400 transition-colors" aria-label="Instagram">
+              <a
+                href="#"
+                className="text-sand-400 hover:text-terracotta-400 transition-colors"
+                aria-label="Instagram"
+              >
                 <Instagram size={20} />
               </a>
-              <a href="#" className="text-sand-400 hover:text-terracotta-400 transition-colors" aria-label="LinkedIn">
+              <a
+                href="#"
+                className="text-sand-400 hover:text-terracotta-400 transition-colors"
+                aria-label="LinkedIn"
+              >
                 <Linkedin size={20} />
               </a>
             </div>
@@ -49,11 +82,16 @@ export default function Footer() {
 
           {/* Explore */}
           <div>
-            <h4 className="text-white font-semibold mb-6 tracking-wide">Explore</h4>
+            <h4 className="text-white font-semibold mb-6 tracking-wide">
+              Explore
+            </h4>
             <ul className="space-y-3">
               {footerLinks.explore.map((link) => (
                 <li key={link.path}>
-                  <Link to={link.path} className="text-sand-300 hover:text-terracotta-400 transition-colors text-sm">
+                  <Link
+                    to={link.path}
+                    className="text-sand-300 hover:text-terracotta-400 transition-colors text-sm"
+                  >
                     {link.name}
                   </Link>
                 </li>
@@ -63,11 +101,16 @@ export default function Footer() {
 
           {/* Destinations */}
           <div>
-            <h4 className="text-white font-semibold mb-6 tracking-wide">Destinations</h4>
+            <h4 className="text-white font-semibold mb-6 tracking-wide">
+              Destinations
+            </h4>
             <ul className="space-y-3">
               {footerLinks.destinations.map((link) => (
                 <li key={link.path}>
-                  <Link to={link.path} className="text-sand-300 hover:text-terracotta-400 transition-colors text-sm">
+                  <Link
+                    to={link.path}
+                    className="text-sand-300 hover:text-terracotta-400 transition-colors text-sm"
+                  >
                     {link.name}
                   </Link>
                 </li>
@@ -77,10 +120,15 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-white font-semibold mb-6 tracking-wide">Contact</h4>
+            <h4 className="text-white font-semibold mb-6 tracking-wide">
+              Contact
+            </h4>
             <ul className="space-y-4">
               <li className="flex items-start space-x-3">
-                <MapPin size={18} className="text-terracotta-400 mt-0.5 flex-shrink-0" />
+                <MapPin
+                  size={18}
+                  className="text-terracotta-400 mt-0.5 flex-shrink-0"
+                />
                 <span className="text-sand-300 text-sm">
                   601, 6th Floor, Millennium Plaza,
                   <br />
@@ -90,7 +138,10 @@ export default function Footer() {
                 </span>
               </li>
               <li className="flex items-center space-x-3">
-                <Phone size={18} className="text-terracotta-400 flex-shrink-0" />
+                <Phone
+                  size={18}
+                  className="text-terracotta-400 flex-shrink-0"
+                />
                 <a
                   href="tel:+919810015651"
                   className="text-sand-300 hover:text-terracotta-400 transition-colors text-sm"
@@ -117,13 +168,20 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sand-400 text-sm">
-              © {new Date().getFullYear()} TIME - Tourism India Management Enterprise. All rights reserved.
+              © {new Date().getFullYear()} TIME - Tourism India Management
+              Enterprise. All rights reserved.
             </p>
             <div className="flex space-x-6">
-              <a href="#" className="text-sand-400 hover:text-terracotta-400 transition-colors text-sm">
+              <a
+                href="#"
+                className="text-sand-400 hover:text-terracotta-400 transition-colors text-sm"
+              >
                 Privacy Policy
               </a>
-              <a href="#" className="text-sand-400 hover:text-terracotta-400 transition-colors text-sm">
+              <a
+                href="#"
+                className="text-sand-400 hover:text-terracotta-400 transition-colors text-sm"
+              >
                 Terms of Service
               </a>
             </div>
@@ -131,5 +189,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
