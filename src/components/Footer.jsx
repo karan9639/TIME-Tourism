@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 const LOGO_URL =
-  "https://res.cloudinary.com/dptxyo9dy/image/upload/e_trim:10,f_auto,q_auto,h_56/v1766144775/TIME_-_Company-removebg-preview_cejuig.png";
+  "https://res.cloudinary.com/dptxyo9dy/image/upload/v1766208995/db12b09d-532d-4a98-b2b0-b9070c23525a.png";
 
 const footerLinks = {
   explore: [
@@ -40,17 +40,15 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="inline-flex items-center">
-              <span className="inline-flex items-center rounded-2xl bg-warm-white/90 px-4 py-2.5 ring-1 ring-white/10 shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
-                <img
-                  src={LOGO_URL}
-                  alt="TIME"
-                  className="h-10 w-auto object-contain"
-                  loading="eager"
-                />
-              </span>
+              <img
+                src={LOGO_URL}
+                alt="TIME"
+                className="h-12 w-auto mb-4"
+                loading="lazy"
+              />
             </Link>
 
-            <p className="text-sand-300 text-sm leading-relaxed mb-6 mt-5">
+            <p className="text-sand-300 text-sm leading-relaxed mb-6">
               Tourism India Management Enterprise – Crafting extraordinary
               journeys across the Indian Subcontinent for over 24 years.
             </p>
