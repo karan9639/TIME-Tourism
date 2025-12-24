@@ -6,25 +6,31 @@ import { ChevronDown } from "lucide-react"
 
 const slides = [
   {
-    image: "/taj-mahal-india-luxury-travel-editorial-golden-hou.jpg",
+    image:
+      "https://res.cloudinary.com/dptxyo9dy/image/upload/v1766550651/taj-mahal-india-luxury-travel-editorial-golden-hou_jjflsn.jpg",
     title: "Extraordinary Journeys",
     titleLine2: "Across the Subcontinent",
     subtitle:
       "Crafting bespoke travel experiences to India, Nepal, Bhutan, Sri Lanka & Maldives with unparalleled expertise and personalized service.",
   },
   {
-    image: "/bhutan-tigers-nest-monastery-luxury-travel-editori.jpg",
+    image:
+      "https://res.cloudinary.com/dptxyo9dy/image/upload/v1766550351/bhutan11650x650_xfehye.jpg",
     title: "Discover the Magic",
     titleLine2: "of Bhutan",
-    subtitle: "Experience the spiritual beauty and ancient traditions of the Land of the Thunder Dragon.",
+    subtitle:
+      "Experience the spiritual beauty and ancient traditions of the Land of the Thunder Dragon.",
   },
   {
-    image: "/nepal-himalaya-mountains-luxury-travel-editorial-p.jpg",
+    image:
+      "https://res.cloudinary.com/dptxyo9dy/image/upload/v1766550632/nepal-himalaya-mountains-luxury-travel-editorial-p_ogvx8w.jpg",
     title: "Himalayan Adventures",
     titleLine2: "Await You",
-    subtitle: "Trek through majestic peaks and discover the cultural treasures of Nepal.",
+    subtitle:
+      "Trek through majestic peaks and discover the cultural treasures of Nepal.",
   },
-]
+];
+
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0)

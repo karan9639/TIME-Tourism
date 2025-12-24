@@ -22,12 +22,32 @@ import {
 
 // Destinations data
 const destinations = [
-  { name: "India", image: "/taj-mahal-india-luxury-travel-editorial-golden-hou.jpg" },
-  { name: "Nepal", image: "/nepal-himalaya-mountains-luxury-travel-editorial-p.jpg" },
-  { name: "Bhutan", image: "/bhutan-tigers-nest-monastery-luxury-travel-editori.jpg" },
-  { name: "Sri Lanka", image: "/sri-lanka-sigiriya-rock-fortress-luxury-travel-edi.jpg" },
-  { name: "Maldives", image: "/maldives-overwater-villa-luxury-travel-editorial-s.jpg" },
-]
+  {
+    name: "India",
+    image:
+      "https://res.cloudinary.com/dptxyo9dy/image/upload/v1766550170/GoldenTriangle_rl2lny.jpg",
+  },
+  {
+    name: "Nepal",
+    image:
+      "https://res.cloudinary.com/dptxyo9dy/image/upload/v1766550632/nepal-himalaya-mountains-luxury-travel-editorial-p_ogvx8w.jpg",
+  },
+  {
+    name: "Bhutan",
+    image:
+      "https://res.cloudinary.com/dptxyo9dy/image/upload/v1766550630/paro-taktsang-bhutan-monastery-clouds-mountains_esh589.jpg",
+  },
+  {
+    name: "Sri Lanka",
+    image:
+      "https://res.cloudinary.com/dptxyo9dy/image/upload/v1766574588/sri-lanka-sigiriya-rock-fortress-luxury-travel-edi_k9nd4l.jpg",
+  },
+  {
+    name: "Maldives",
+    image:
+      "https://res.cloudinary.com/dptxyo9dy/image/upload/v1766550626/maldives-overwater-villa-luxury-travel-editorial-s_ebozac.jpg",
+  },
+];
 
 // Services data
 const services = [
@@ -72,16 +92,23 @@ const services = [
 const experiences = [
   {
     title: "Heritage Palaces & Royal Stays",
-    image: "/indian-heritage-fort-rajasthan-luxury.jpg",
+    image:
+      "https://res.cloudinary.com/dptxyo9dy/image/upload/v1766550608/indian-heritage-fort-rajasthan-luxury_k1mede.jpg",
     category: "Luxury",
   },
-  { title: "Wildlife Safaris", image: "/tiger-safari-india-wildlife-jungle.jpg", category: "Adventure" },
+  {
+    title: "Wildlife Safaris",
+    image:
+      "https://res.cloudinary.com/dptxyo9dy/image/upload/v1766550663/tiger-safari-india-wildlife-jungle_abwspy.jpg",
+    category: "Adventure",
+  },
   {
     title: "Spiritual Journeys",
-    image: "/varanasi-ghats-sunrise-india-spiritual-travel-phot.jpg",
+    image:
+      "https://res.cloudinary.com/dptxyo9dy/image/upload/v1766550671/varanasi-ghats-sunrise-india-spiritual-travel-phot_gngy4n.jpg",
     category: "Culture",
   },
-]
+];
 
 // Testimonials
 const testimonials = [
