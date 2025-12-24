@@ -4,109 +4,78 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: oklch(0.99 0.005 80);
+  --foreground: oklch(0.25 0.02 60);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.25 0.02 60);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.25 0.02 60);
+  --primary: oklch(0.65 0.12 45);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.96 0.01 80);
+  --secondary-foreground: oklch(0.25 0.02 60);
+  --muted: oklch(0.95 0.01 80);
+  --muted-foreground: oklch(0.5 0.02 60);
+  --accent: oklch(0.65 0.12 45);
+  --accent-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --border: oklch(0.9 0.01 80);
+  --input: oklch(0.9 0.01 80);
+  --ring: oklch(0.65 0.12 45);
+  --radius: 0.5rem;
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
-}
-
+/* Updated theme with terracotta/coral primary color palette */
 @theme inline {
-  --font-sans: "Cormorant Garamond", "Georgia", serif;
-  --font-serif: "Cormorant Garamond", "Georgia", serif;
-  --font-body: "Inter", "system-ui", sans-serif;
+  --font-sans: "Inter", "system-ui", sans-serif;
+  --font-serif: "Playfair Display", "Georgia", serif;
+  --font-script: "Dancing Script", cursive;
 
-  /* Custom Colors - Sand & Terracotta Palette */
-  --color-sand-50: #fdfcfa;
-  --color-sand-100: #f9f6f1;
-  --color-sand-200: #f0e9dc;
-  --color-sand-300: #e4d5c1;
-  --color-sand-400: #d4bfa3;
-  --color-sand-500: #c4a882;
-  --color-sand-600: #a8875e;
-  --color-sand-700: #8b6d48;
-  --color-sand-800: #6e5539;
-  --color-sand-900: #52402b;
+  /* Terracotta/Coral primary color - matches reference design */
+  --color-terracotta-50: #fdf8f6;
+  --color-terracotta-100: #f8ebe5;
+  --color-terracotta-200: #f2d5c8;
+  --color-terracotta-300: #e8b8a3;
+  --color-terracotta-400: #d99b7e;
+  --color-terracotta-500: #c27c5b;
+  --color-terracotta-600: #b0684a;
+  --color-terracotta-700: #93533c;
+  --color-terracotta-800: #784536;
+  --color-terracotta-900: #633b30;
 
-  --color-terracotta-50: #fdf6f4;
-  --color-terracotta-100: #f9e8e3;
-  --color-terracotta-200: #f2cfc4;
-  --color-terracotta-300: #e8ad9b;
-  --color-terracotta-400: #da8468;
-  --color-terracotta-500: #c9694a;
-  --color-terracotta-600: #b5523a;
-  --color-terracotta-700: #964331;
-  --color-terracotta-800: #7a392c;
-  --color-terracotta-900: #653228;
+  /* Cream/Sand neutral backgrounds */
+  --color-cream-50: #fefdfb;
+  --color-cream-100: #faf8f5;
+  --color-cream-200: #f5f1eb;
+  --color-cream-300: #ebe5db;
+  --color-cream-400: #ddd4c6;
+  --color-cream-500: #c9bba8;
 
-  --color-charcoal: #2c2c2c;
+  /* Sand colors for gallery backgrounds */
+  --color-sand-50: #faf9f7;
+  --color-sand-100: #f5f3ef;
+  --color-sand-200: #e8e4dc;
+  --color-sand-300: #d4cec2;
+  --color-sand-400: #b8b0a0;
+  --color-sand-500: #9a9080;
+  --color-sand-600: #7d7468;
+
+  /* Taupe for headers and accents */
+  --color-taupe-50: #f9f8f7;
+  --color-taupe-100: #f0eeec;
+  --color-taupe-200: #e0dbd6;
+  --color-taupe-300: #c9c2ba;
+  --color-taupe-400: #aea59a;
+  --color-taupe-500: #968b7d;
+  --color-taupe-600: #7d7368;
+  --color-taupe-700: #665e55;
+  --color-taupe-800: #4f4942;
+  --color-taupe-900: #3d3833;
+
+  --color-charcoal: #2d2926;
   --color-warm-white: #fefdfb;
-  --color-cream: #f8f5f0;
 
-  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -126,23 +95,10 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 @layer base {
@@ -150,7 +106,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-cream-50 text-charcoal;
   }
 }
 
@@ -166,20 +122,60 @@
   transform: translateY(0);
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - terracotta accent */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f8f5f0;
+  background: #f5f1eb;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c4a882;
+  background: #c27c5b;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8875e;
+  background: #b0684a;
+}
+
+/* Hide scrollbar utility for filter buttons and tabs */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Font classes */
+.font-script {
+  font-family: "Dancing Script", cursive;
+}
+
+.font-serif {
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+/* Ensure images don't overflow containers */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Fix overflow issues on mobile */
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* Better touch targets on mobile */
+@media (max-width: 640px) {
+  button,
+  a {
+    min-height: 44px;
+  }
 }

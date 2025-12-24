@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom"
 import PageHeader from "../components/PageHeader"
 import RevealWrapper from "../components/RevealWrapper"
 import EnquiryForm from "../components/EnquiryForm"
+import CloudinaryGallery from "../components/CloudinaryGallery"
 import { destinations } from "../data/destinations"
 import { Check, MapPin } from "lucide-react"
 
@@ -23,6 +24,12 @@ export default function DestinationDetail() {
       </div>
     )
   }
+
+  const destinationGallery = Array.from({ length: 8 }, (_, i) => ({
+    url: `/placeholder.svg?height=800&width=1200&query=${destination.name} ${destination.highlights[i % destination.highlights.length]} luxury travel photography`,
+    alt: `${destination.name} - ${destination.highlights[i % destination.highlights.length]}`,
+    title: destination.highlights[i % destination.highlights.length],
+  }))
 
   return (
     <>
@@ -59,23 +66,26 @@ export default function DestinationDetail() {
         </div>
       </section>
 
-      {/* Gallery Preview */}
-      <section className="py-16 bg-cream">
+      {/* Gallery - Using CloudinaryGallery component with grid layout */}
+      <section className="py-16 lg:py-20 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealWrapper className="text-center mb-12">
-            <h2 className="text-3xl font-serif text-charcoal">Gallery</h2>
+            <span className="text-terracotta-500 text-sm tracking-[0.2em] uppercase font-medium">Photo Gallery</span>
+            <h2 className="text-3xl font-serif text-charcoal mt-4">Experience {destination.name}</h2>
+            <p className="text-sand-600 mt-4 max-w-2xl mx-auto">
+              Explore our curated collection of photographs capturing the essence and beauty of {destination.name}
+            </p>
           </RevealWrapper>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[1, 2, 3, 4].map((i) => (
-              <RevealWrapper key={i} delay={i * 100}>
-                <img
-                  src={`/placeholder.svg?height=400&width=400&query=${destination.name} ${destination.highlights[i - 1] || "travel"} luxury photography`}
-                  alt={`${destination.name} gallery ${i}`}
-                  className="w-full aspect-square object-cover"
-                />
-              </RevealWrapper>
-            ))}
-          </div>
+
+          <RevealWrapper delay={200}>
+            <CloudinaryGallery
+              images={destinationGallery}
+              layout="grid"
+              columns={4}
+              aspectRatio="landscape"
+              enableLightbox={true}
+            />
+          </RevealWrapper>
         </div>
       </section>
 
