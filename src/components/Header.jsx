@@ -19,16 +19,16 @@ const LOGO_URL =
   "https://res.cloudinary.com/dptxyo9dy/image/upload/v1766144775/TIME_-_Company-removebg-preview_cejuig.png";
 
 export default function Header() {
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
 
   // scroll state
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 20);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   // close menu on route change
@@ -46,7 +46,7 @@ export default function Header() {
     };
   }, [isMobileMenuOpen]);
 
-  // escape closes menu
+  // ESC closes menu
   useEffect(() => {
     const onKeyDown = (e) => {
       if (e.key === "Escape") setIsMobileMenuOpen(false);
@@ -56,61 +56,62 @@ export default function Header() {
   }, [isMobileMenuOpen]);
 
   const isHome = location.pathname === "/";
-  const isSolidHeader = isScrolled || !isHome;
+
+  // ✅ Make header ALWAYS readable:
+  // - On desktop: always white background like your screenshot
+  // - On mobile: white background too
+  // (If you later want transparent-on-hero, I can add a safe mode.)
+  const headerClasses =
+    "bg-white/95 backdrop-blur-md shadow-sm border-b border-cream-300";
 
   return (
     <>
-      {/* Top Info Bar */}
-      <div className="bg-charcoal text-white py-2 text-xs hidden md:block">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <div className="flex items-center gap-6">
-            <a
-              href="mailto:info@tourismindiamanagement.com"
-              className="flex items-center gap-2 hover:text-terracotta-300 transition-colors"
-            >
-              <Mail size={14} />
-              <span>info@tourismindiamanagement.com</span>
-            </a>
-            <span className="flex items-center gap-2">
-              <MapPin size={14} />
-              <span>27615 SE Robinson RD, Camas WA 98607</span>
-            </span>
+      {/* Top bar (desktop only) */}
+      <div className="hidden md:block fixed top-0 left-0 right-0 z-[60] bg-charcoal text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="h-10 flex items-center justify-between text-xs">
+            <div className="flex items-center gap-6">
+              <a
+                href="mailto:info@tourismindiamanagement.com"
+                className="flex items-center gap-2 hover:text-terracotta-300 transition-colors"
+              >
+                <Mail size={14} />
+                <span>info@tourismindiamanagement.com</span>
+              </a>
+              <span className="flex items-center gap-2">
+                <MapPin size={14} />
+                <span>27615 SE Robinson RD, Camas WA 98607</span>
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Header */}
       <header
-        className={[
-          "fixed left-0 right-0 z-50 transition-all duration-300",
-          "top-0", // ✅ keep it stable (no jumpy top-8/top-10)
-          isSolidHeader
-            ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-cream-300"
-            : "bg-transparent",
-        ].join(" ")}
+        className={`fixed left-0 right-0 z-50 transition-all duration-300 top-0 md:top-10 ${headerClasses}`}
       >
         <nav
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-          aria-label="Primary"
+          aria-label="Primary Navigation"
         >
-          <div className="flex items-center justify-between h-20">
+          <div className="h-16 md:h-20 flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="flex items-center" aria-label="Go to home">
+            <Link
+              to="/"
+              className="flex items-center gap-3"
+              aria-label="Go to home"
+            >
               <img
                 src={LOGO_URL}
                 alt="TIME"
-                className={[
-                  "h-10 w-auto transition-all duration-300",
-                  isSolidHeader
-                    ? "drop-shadow-none"
-                    : "drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]",
-                ].join(" ")}
+                className="h-9 sm:h-10 md:h-11 w-auto"
                 loading="eager"
                 decoding="async"
               />
             </Link>
 
-            {/* Desktop Navigation */}
+            {/* Desktop links */}
             <div className="hidden lg:flex items-center gap-6">
               {navLinks.map((link) => {
                 const active = location.pathname === link.path;
@@ -120,9 +121,7 @@ export default function Header() {
                     to={link.path}
                     className={[
                       "text-sm font-medium transition-colors duration-300",
-                      isSolidHeader
-                        ? "text-charcoal hover:text-terracotta-500"
-                        : "text-white/90 hover:text-white",
+                      "text-charcoal hover:text-terracotta-500",
                       active ? "text-terracotta-500" : "",
                     ].join(" ")}
                   >
@@ -136,27 +135,17 @@ export default function Header() {
             <div className="hidden lg:block">
               <Link
                 to="/contact"
-                className={[
-                  "px-6 py-2.5 text-sm font-medium rounded transition-all duration-300",
-                  isSolidHeader
-                    ? "bg-terracotta-500 text-white hover:bg-terracotta-600"
-                    : "bg-white/20 text-white border border-white/40 hover:bg-white hover:text-charcoal",
-                ].join(" ")}
+                className="px-6 py-2.5 text-sm font-medium rounded bg-terracotta-500 text-white hover:bg-terracotta-600 transition"
               >
                 Enquire Now
               </Link>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile toggle */}
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen((v) => !v)}
-              className={[
-                "lg:hidden p-2 rounded-md transition-colors",
-                isSolidHeader
-                  ? "text-charcoal hover:bg-cream-100"
-                  : "text-white hover:bg-white/10",
-              ].join(" ")}
+              className="lg:hidden p-2 rounded-md text-charcoal hover:bg-cream-100 transition-colors"
               aria-label={
                 isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"
               }
@@ -169,7 +158,7 @@ export default function Header() {
         </nav>
       </header>
 
-      {/* Mobile Backdrop */}
+      {/* Backdrop */}
       {isMobileMenuOpen && (
         <div
           className="lg:hidden fixed inset-0 z-40 bg-black/50"
@@ -178,11 +167,12 @@ export default function Header() {
         />
       )}
 
-      {/* Mobile Drawer */}
+      {/* Mobile drawer (below header) */}
       <aside
         id="mobile-menu"
         className={[
-          "lg:hidden fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white z-50",
+          "lg:hidden fixed right-0 bottom-0 w-full max-w-sm bg-white z-50",
+          "top-16", // below mobile header
           "transition-transform duration-300 ease-in-out",
           "overflow-y-auto",
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full",
@@ -191,55 +181,28 @@ export default function Header() {
         aria-modal="true"
         aria-label="Mobile navigation"
       >
-        {/* Drawer Header */}
-        <div className="sticky top-0 bg-white border-b border-cream-200 z-10">
-          <div className="flex items-center justify-between px-4 h-20">
-            <Link
-              to="/"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center"
-              aria-label="Go to home"
-            >
-              <img
-                src={LOGO_URL}
-                alt="TIME"
-                className="h-10 w-auto"
-                loading="eager"
-                decoding="async"
-              />
-            </Link>
+        <div className="p-5">
 
-            <button
-              type="button"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="p-2 text-charcoal hover:bg-cream-100 rounded-md transition-colors"
-              aria-label="Close mobile menu"
-            >
-              <X size={24} />
-            </button>
+          <div className="flex flex-col space-y-1">
+            {navLinks.map((link) => {
+              const active = location.pathname === link.path;
+              return (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={[
+                    "text-base font-medium py-3 px-4 rounded-lg transition-colors",
+                    active
+                      ? "text-terracotta-500 bg-terracotta-50"
+                      : "text-charcoal hover:bg-cream-100",
+                  ].join(" ")}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </div>
-        </div>
-
-        {/* Drawer Links */}
-        <div className="flex flex-col p-6 space-y-1">
-          {navLinks.map((link) => {
-            const active = location.pathname === link.path;
-            return (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={[
-                  "text-base font-medium py-3 px-4 rounded-lg transition-colors",
-                  active
-                    ? "text-terracotta-500 bg-terracotta-50"
-                    : "text-charcoal hover:bg-cream-100",
-                ].join(" ")}
-              >
-                {link.name}
-              </Link>
-            );
-          })}
 
           <div className="pt-4">
             <Link
@@ -267,8 +230,8 @@ export default function Header() {
         </div>
       </aside>
 
-      {/* Spacer so content doesn't hide behind fixed header (h-20 header + optional topbar on md+) */}
-      <div className="h-20 md:h-[calc(5rem+2rem)]" />
+      {/* Spacer: mobile header 64px; desktop topbar 40px + header 80px = 120px */}
+      <div className="h-16 md:h-[120px]" />
     </>
   );
 }
