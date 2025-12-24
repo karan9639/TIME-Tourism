@@ -146,31 +146,6 @@ export default function StoryDetail() {
               </div>
             )}
 
-            {/* Meta & Share */}
-            <div className="flex items-center justify-between py-4 border-t border-b border-gray-200 mb-8">
-              <div className="flex items-center gap-4 text-sm text-gray-500">
-                <span>{story.date}</span>
-                <span className="flex items-center gap-1">
-                  <MessageCircle size={16} />
-                  {story.comments.length} Comments
-                </span>
-              </div>
-              <div className="flex items-center gap-3">
-                <button className="text-gray-400 hover:text-blue-600">
-                  <Facebook size={18} />
-                </button>
-                <button className="text-gray-400 hover:text-blue-400">
-                  <Twitter size={18} />
-                </button>
-                <button className="text-gray-400 hover:text-blue-700">
-                  <Linkedin size={18} />
-                </button>
-                <button className="text-gray-400 hover:text-red-600">
-                  <Pinterest size={18} />
-                </button>
-              </div>
-            </div>
-
             {/* Prev/Next Navigation */}
             <div className="flex justify-between items-center mb-12">
               {prevStory ? (
@@ -205,101 +180,6 @@ export default function StoryDetail() {
                 <div />
               )}
             </div>
-
-            {/* Comments Section */}
-            <section className="mb-12">
-              <h2 className="text-2xl font-serif text-charcoal mb-6">Comments</h2>
-
-              {story.comments.length > 0 ? (
-                <div className="space-y-6">
-                  {story.comments.map((comment) => (
-                    <div key={comment.id} className="flex gap-4">
-                      <div className="w-12 h-12 bg-gray-200 rounded-full flex-shrink-0" />
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between">
-                          <h4 className="font-semibold text-charcoal">{comment.author}</h4>
-                          <button className="text-sm text-teal-600 hover:underline">reply</button>
-                        </div>
-                        <p className="text-xs text-gray-500 mb-2">{comment.date}</p>
-                        <p className="text-gray-600">{comment.content}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-500">No comments yet. Be the first to comment!</p>
-              )}
-            </section>
-
-            {/* Comment Form */}
-            <section className="bg-teal-600 rounded-lg p-8">
-              <h2 className="text-2xl font-script text-white mb-6">Post a Comment</h2>
-
-              <form onSubmit={handleSubmitComment} className="space-y-4">
-                <div>
-                  <label htmlFor="comment" className="sr-only">
-                    Comment
-                  </label>
-                  <textarea
-                    id="comment"
-                    rows={4}
-                    placeholder="Comment"
-                    className="w-full px-4 py-3 rounded bg-teal-700 text-white placeholder-teal-300 border-0 focus:ring-2 focus:ring-white"
-                    value={commentForm.comment}
-                    onChange={(e) => setCommentForm({ ...commentForm, comment: e.target.value })}
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="name" className="sr-only">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      placeholder="Name*"
-                      className="w-full px-4 py-3 rounded bg-teal-700 text-white placeholder-teal-300 border-0 focus:ring-2 focus:ring-white"
-                      value={commentForm.name}
-                      onChange={(e) => setCommentForm({ ...commentForm, name: e.target.value })}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="sr-only">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      placeholder="Email*"
-                      className="w-full px-4 py-3 rounded bg-teal-700 text-white placeholder-teal-300 border-0 focus:ring-2 focus:ring-white"
-                      value={commentForm.email}
-                      onChange={(e) => setCommentForm({ ...commentForm, email: e.target.value })}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    id="saveInfo"
-                    className="rounded text-teal-500"
-                    checked={commentForm.saveInfo}
-                    onChange={(e) => setCommentForm({ ...commentForm, saveInfo: e.target.checked })}
-                  />
-                  <label htmlFor="saveInfo" className="text-sm text-teal-200">
-                    Save my name, email, and website in this browser for the next time I comment.
-                  </label>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-white text-charcoal font-medium py-3 rounded hover:bg-gray-100 transition-colors"
-                >
-                  SUBMIT
-                </button>
-              </form>
-            </section>
           </RevealWrapper>
         </div>
       </main>
