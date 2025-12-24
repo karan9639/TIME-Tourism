@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import PageHeader from "../components/PageHeader"
 import RevealWrapper from "../components/RevealWrapper"
-import { ChevronLeft, ChevronRight, Play } from "lucide-react"
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
 
 const testimonials = [
   {
@@ -42,6 +42,16 @@ const testimonials = [
   },
 ]
 
+const partners = [
+  { name: "Tourism of India", logo: "/tourism-india-logo.jpg" },
+  { name: "IATO", logo: "/iato-travel-logo.jpg" },
+  { name: "ASTA", logo: "/asta-travel-logo.jpg" },
+  { name: "USTOA", logo: "/ustoa-travel-logo.jpg" },
+  { name: "TAAI", logo: "/taai-travel-logo.jpg" },
+  { name: "SITE", logo: "/site-events-logo.jpg" },
+  { name: "PATA", logo: "/pata-asia-travel-logo.jpg" },
+]
+
 export default function Testimonials() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
 
@@ -59,78 +69,42 @@ export default function Testimonials() {
     <>
       <PageHeader title="Testimonials" image="/yoga-retreat-kerala-wellness-spa.jpg" />
 
-      {/* Video Section */}
+      {/* Testimonials Carousel */}
       <section className="py-16 lg:py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealWrapper>
-            <div className="relative aspect-video rounded-lg overflow-hidden shadow-lg">
-              <img
-                src="/maldives-overwater-villa-luxury-travel-editorial-s.jpg"
-                alt="Testimonial Video"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-8 h-8 bg-coral-500 rounded flex items-center justify-center">
-                      <span className="text-white font-bold text-sm">T</span>
-                    </div>
-                    <span className="text-white font-semibold">Time Tours</span>
-                    <button className="ml-4 text-white/80 hover:text-white text-sm flex items-center gap-1">
-                      Copy link
-                    </button>
-                  </div>
-                  <button className="w-16 h-16 bg-coral-500 rounded-full flex items-center justify-center hover:bg-coral-600 transition-colors">
-                    <Play size={28} className="text-white ml-1" />
-                  </button>
-                  <p className="text-white/80 text-sm mt-4">Watch on YouTube</p>
+            <div className="relative text-center">
+              {/* Testimonial Icon */}
+              <div className="w-20 h-20 mx-auto mb-8 bg-orange-100 rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center text-white">
+                  <Quote size={24} />
                 </div>
               </div>
-            </div>
-          </RevealWrapper>
-        </div>
-      </section>
 
-      {/* Testimonials Carousel */}
-      <section className="py-16 lg:py-20 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <RevealWrapper>
-            <div className="text-center">
-              {/* Testimonial Icon */}
-              <div className="w-20 h-20 bg-coral-500 rounded-full flex items-center justify-center mx-auto mb-8">
-                <svg viewBox="0 0 24 24" fill="white" className="w-10 h-10">
-                  <circle cx="12" cy="12" r="10" fill="none" stroke="white" strokeWidth="2" />
-                  <circle cx="12" cy="8" r="3" fill="white" />
-                  <path d="M6 18c0-3 3-5 6-5s6 2 6 5" fill="white" />
-                </svg>
-              </div>
+              {/* Navigation arrows */}
+              <button
+                onClick={prevTestimonial}
+                className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-gray-400 hover:text-teal-500 transition-colors"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft size={24} />
+              </button>
+
+              <button
+                onClick={nextTestimonial}
+                className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-gray-400 hover:text-teal-500 transition-colors"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight size={24} />
+              </button>
 
               {/* Testimonial Content */}
-              <div className="relative">
-                <button
-                  onClick={prevTestimonial}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors"
-                  aria-label="Previous testimonial"
-                >
-                  <ChevronLeft size={24} />
-                </button>
-
-                <div className="px-12">
-                  <blockquote className="text-lg md:text-xl text-gray-700 italic mb-6 min-h-[120px]">
-                    "{testimonials[currentTestimonial].quote}"
-                  </blockquote>
-                  <p className="font-script text-2xl text-charcoal">
-                    {testimonials[currentTestimonial].name} ({testimonials[currentTestimonial].location})
-                  </p>
-                </div>
-
-                <button
-                  onClick={nextTestimonial}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors"
-                  aria-label="Next testimonial"
-                >
-                  <ChevronRight size={24} />
-                </button>
+              <div className="px-12">
+                <blockquote className="text-lg md:text-xl text-gray-700 italic mb-6 min-h-[120px]">
+                  "{testimonials[currentTestimonial].quote}"
+                </blockquote>
+                <p className="font-script text-2xl text-charcoal">{testimonials[currentTestimonial].name}</p>
+                <p className="text-gray-500 text-sm">({testimonials[currentTestimonial].location})</p>
               </div>
 
               {/* Carousel Dots */}
@@ -148,6 +122,22 @@ export default function Testimonials() {
               </div>
             </div>
           </RevealWrapper>
+        </div>
+      </section>
+
+      {/* Partners Section */}
+      <section className="py-12 bg-gray-50 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+            {partners.map((partner, index) => (
+              <div key={index} className="grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100">
+                <img src={partner.logo || "/placeholder.svg"} alt={partner.name} className="h-12 w-auto" />
+              </div>
+            ))}
+          </div>
+          <div className="text-right mt-4">
+            <span className="text-teal-500 text-sm font-medium">TOP</span>
+          </div>
         </div>
       </section>
     </>

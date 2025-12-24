@@ -5,36 +5,37 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* use HSL triples (not hex) because tailwind config uses hsl(var(--...)) */
-  --background: 0 0% 99%;
-  --foreground: 20 10% 12%;
+  /* Updated color scheme to match timetours.us - cyan/teal primary */
+  --background: 0 0% 100%;
+  --foreground: 0 0% 10%;
 
   --card: 0 0% 100%;
-  --card-foreground: 20 10% 12%;
+  --card-foreground: 0 0% 10%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 20 10% 12%;
+  --popover-foreground: 0 0% 10%;
 
-  --primary: 18 60% 55%;
+  /* Primary teal/cyan color from reference */
+  --primary: 174 72% 44%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 30 35% 92%;
-  --secondary-foreground: 20 10% 12%;
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 10%;
 
-  --muted: 30 35% 92%;
-  --muted-foreground: 20 8% 40%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 45%;
 
-  --accent: 30 35% 92%;
-  --accent-foreground: 20 10% 12%;
+  --accent: 350 75% 55%;
+  --accent-foreground: 0 0% 100%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --border: 30 20% 85%;
-  --input: 30 20% 85%;
-  --ring: 18 60% 55%;
+  --border: 0 0% 90%;
+  --input: 0 0% 90%;
+  --ring: 174 72% 44%;
 
-  --radius: 0.75rem;
+  --radius: 0.5rem;
 }
 
 @layer base {
@@ -53,15 +54,17 @@
   h4,
   h5,
   h6 {
-    font-family: "Cormorant Garamond", Georgia, serif;
+    font-family: "Playfair Display", Georgia, serif;
   }
 
   html {
     scroll-behavior: smooth;
+    /* Prevent horizontal overflow on mobile */
+    overflow-x: hidden;
   }
 }
 
-/* optional */
+/* Reveal animations */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -71,4 +74,54 @@
 .reveal.active {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Custom scrollbar for better UX */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Line clamp utilities */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Mobile tap highlight removal */
+@layer base {
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Better touch targets for mobile */
+@media (max-width: 640px) {
+  button,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Exception for inline links and small badges */
+  p a,
+  span a,
+  .inline-link {
+    min-height: auto;
+    min-width: auto;
+  }
 }

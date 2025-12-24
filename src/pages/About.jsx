@@ -1,8 +1,9 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import PageHeader from "../components/PageHeader"
 import RevealWrapper from "../components/RevealWrapper"
-import { Heart, Award, Users, Leaf, Target, Eye } from "lucide-react"
+import { Heart, Award, Users, Leaf, ChevronLeft, ChevronRight, Quote } from "lucide-react"
 
 const values = [
   {
@@ -43,65 +44,77 @@ const team = [
   },
 ]
 
-const awards = [
-  { name: "IATO Member", description: "Indian Association of Tour Operators" },
-  { name: "PATA Member", description: "Pacific Asia Travel Association" },
-  { name: "USTOA Allied", description: "United States Tour Operators Association" },
-  { name: "Traveller Made", description: "Global Network of Travel Designers" },
+const testimonials = [
+  {
+    quote:
+      "I thank you for the professional and kind assistance you provided during our mission in India, Mr. Luca di Montezemolo (CEO of Ferrari) & the whole Italian delegation were very glad about your work.",
+    name: "Patriza Barboni",
+    location: "Rome Italy",
+  },
+  {
+    quote: "Good Service & lovely people. You made my trip an excellent experience. Thanks for your help.",
+    name: "Anthony Westbrook",
+    location: "California USA",
+  },
+]
+
+const partners = [
+  { name: "Tourism of India", logo: "/tourism-india-logo.jpg" },
+  { name: "IATO", logo: "/iato-travel-logo.jpg" },
+  { name: "ASTA", logo: "/asta-travel-logo.jpg" },
+  { name: "USTOA", logo: "/ustoa-travel-logo.jpg" },
+  { name: "TAAI", logo: "/taai-travel-logo.jpg" },
+  { name: "SITE", logo: "/site-events-logo.jpg" },
+  { name: "PATA", logo: "/pata-asia-travel-logo.jpg" },
 ]
 
 export default function About() {
+  const [currentTestimonial, setCurrentTestimonial] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
+    }, 6000)
+    return () => clearInterval(timer)
+  }, [])
+
+  const nextTestimonial = () => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
+  const prevTestimonial = () => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+
   return (
     <>
-      <PageHeader
-        title="About TIME"
-        subtitle="24 years of crafting extraordinary journeys across the Indian Subcontinent"
-        image="/indian-heritage-fort-rajasthan-luxury.jpg"
-      />
+      <PageHeader title="About Us" image="/indian-heritage-fort-rajasthan-luxury.jpg" />
 
-      {/* Our Story Section */}
-      <section className="py-16 lg:py-24 bg-cream-50">
+      {/* About Time Tours Section */}
+      <section className="py-16 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <RevealWrapper>
-              <p className="text-terracotta-500 tracking-[0.2em] text-sm uppercase mb-4">Our Story</p>
-              <h2 className="text-3xl md:text-4xl font-serif text-charcoal mb-6">A Legacy of Excellence Since 2000</h2>
-              <div className="space-y-4 text-taupe-600 leading-relaxed">
+              <h2 className="text-3xl md:text-4xl font-serif text-charcoal mb-6">About Time Tours</h2>
+              <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
-                  TIME – Tourism India Management Enterprise Pvt Ltd. is a distinguished destination management company
-                  with over 24 years of expertise in delivering exceptional travel experiences across the Indian
-                  Subcontinent.
+                  In today's world where man and machine are synonyms due to fast growing technology, a holiday has
+                  become a must for us to relax and rejuvenate. The tourism industry, therefore, has become one of the
+                  fast growing industries and is changing its dimensions every minute. We at TIME understand the
+                  changing time and demands of travelers and therefore aim to provide all our clients with an
+                  experience, which is unparalleled.
                 </p>
                 <p>
-                  Specializing in crafting bespoke, authentic itineraries for destinations including India, Maldives,
-                  Sri Lanka, Nepal, and Bhutan, we offer a comprehensive range of services, from luxury holidays to
-                  niche, special-interest tours.
+                  TIME was established in 1998 with the sole aim of providing quality services viz a viz value for
+                  money. The Indian sub-continent being one of the most challenging destinations requires a lot of
+                  expertise and dedication, therefore we at TIME ensure to provide all our Travel Partners services
+                  which not only make their clients happy but gives us a repeat value.
                 </p>
-                <p>
-                  With a strong focus on personalization, we design tailor-made programs to meet individual and group
-                  travelers' unique preferences and requirements. Our team of highly skilled travel planners and
-                  knowledgeable guides, combined with our exclusive product offerings and unparalleled service,
-                  consistently earns accolades from discerning clients.
-                </p>
-                <p>
-                  At TIME, we are dedicated to providing immersive and unforgettable experiences, ensuring that every
-                  journey is not just a trip, but a memorable adventure that exceeds expectations.
-                </p>
+                <p className="italic">Our motto, "The Company that cares", says it all.</p>
               </div>
             </RevealWrapper>
 
             <RevealWrapper delay={200}>
-              <div className="relative">
-                <div className="aspect-[4/3] bg-cream-200 rounded-lg overflow-hidden">
-                  <img
-                    src="/taj-mahal-india-luxury-travel-editorial-golden-hou.jpg"
-                    alt="TIME Tours Experience"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="absolute -bottom-6 -right-6 bg-terracotta-500 text-white p-6 rounded-lg">
-                  <p className="text-4xl font-bold">24+</p>
-                  <p className="text-sm uppercase tracking-wider">Years of Excellence</p>
+              <div className="flex justify-center lg:justify-end">
+                <div className="text-center">
+                  <div className="text-6xl md:text-8xl font-bold text-charcoal tracking-wider">TIME</div>
+                  <div className="w-4 h-4 bg-rose-500 rounded-full mx-auto -mt-2"></div>
+                  <p className="text-gray-600 mt-4 italic">The company that cares</p>
                 </div>
               </div>
             </RevealWrapper>
@@ -109,114 +122,61 @@ export default function About() {
         </div>
       </section>
 
-      {/* Mission & Vision Section */}
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <RevealWrapper>
-              <div className="bg-cream-50 p-8 rounded-lg border border-cream-200">
-                <div className="w-14 h-14 bg-terracotta-100 rounded-full flex items-center justify-center mb-6">
-                  <Target size={24} className="text-terracotta-500" />
-                </div>
-                <h3 className="text-xl font-serif text-charcoal mb-4">Our Mission</h3>
-                <p className="text-taupe-600 leading-relaxed">
-                  To create extraordinary travel experiences that connect travelers with the authentic soul of the
-                  Indian Subcontinent, while delivering exceptional service that exceeds expectations at every
-                  touchpoint.
-                </p>
-              </div>
-            </RevealWrapper>
-
-            <RevealWrapper delay={200}>
-              <div className="bg-cream-50 p-8 rounded-lg border border-cream-200">
-                <div className="w-14 h-14 bg-terracotta-100 rounded-full flex items-center justify-center mb-6">
-                  <Eye size={24} className="text-terracotta-500" />
-                </div>
-                <h3 className="text-xl font-serif text-charcoal mb-4">Our Vision</h3>
-                <p className="text-taupe-600 leading-relaxed">
-                  To be the premier destination management company in the Indian Subcontinent, recognized globally for
-                  our commitment to excellence, innovation, and sustainable tourism practices.
-                </p>
-              </div>
-            </RevealWrapper>
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section */}
-      <section className="py-16 lg:py-24 bg-cream-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <RevealWrapper className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-script text-charcoal">Our Values</h2>
-          </RevealWrapper>
-
-          <RevealWrapper delay={200}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {values.map((value, index) => (
-                <div key={index} className="text-center">
-                  <div className="w-16 h-16 bg-terracotta-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <value.icon size={28} className="text-terracotta-500" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-charcoal mb-2">{value.title}</h3>
-                  <p className="text-taupe-600 text-sm leading-relaxed">{value.description}</p>
-                </div>
-              ))}
-            </div>
-          </RevealWrapper>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <RevealWrapper className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-script text-charcoal">Meet Our Team</h2>
-          </RevealWrapper>
-
-          <RevealWrapper delay={200}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-              {team.map((member, index) => (
-                <div key={index} className="text-center">
-                  <div className="w-32 h-32 bg-cream-200 rounded-full mx-auto mb-6 flex items-center justify-center">
-                    <Users size={48} className="text-taupe-400" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-charcoal">{member.name}</h3>
-                  <p className="text-terracotta-500 text-sm mb-4">{member.role}</p>
-                  <p className="text-taupe-600 text-sm leading-relaxed">{member.description}</p>
-                </div>
-              ))}
-            </div>
-          </RevealWrapper>
-        </div>
-      </section>
-
-      {/* Awards Section */}
-      <section className="py-16 lg:py-20 bg-charcoal">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* Testimonials Section */}
+      <section className="py-16 lg:py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealWrapper>
-            <div className="w-14 h-14 bg-terracotta-500 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Award size={24} className="text-white" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-serif text-white mb-4">Recognized Excellence</h2>
-            <p className="text-taupe-400 max-w-2xl mx-auto mb-12">
-              Our commitment to exceptional service has been recognized by leading travel organizations and publications
-              worldwide.
-            </p>
-          </RevealWrapper>
-
-          <RevealWrapper delay={200}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {awards.map((award, index) => (
-                <div key={index} className="text-center">
-                  <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Award size={24} className="text-terracotta-400" />
-                  </div>
-                  <h3 className="text-white font-medium mb-1">{award.name}</h3>
-                  <p className="text-taupe-500 text-xs">{award.description}</p>
+            <div className="relative text-center">
+              {/* Avatar icon */}
+              <div className="w-20 h-20 mx-auto mb-8 bg-orange-100 rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center text-white">
+                  <Quote size={24} />
                 </div>
-              ))}
+              </div>
+
+              {/* Navigation arrows */}
+              <button
+                onClick={prevTestimonial}
+                className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-gray-400 hover:text-teal-500 transition-colors"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft size={24} />
+              </button>
+
+              <button
+                onClick={nextTestimonial}
+                className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-gray-400 hover:text-teal-500 transition-colors"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight size={24} />
+              </button>
+
+              {/* Quote */}
+              <blockquote className="text-gray-700 text-lg md:text-xl italic mb-6 px-12">
+                "{testimonials[currentTestimonial].quote}"
+              </blockquote>
+
+              {/* Author */}
+              <p className="font-script text-xl text-charcoal">{testimonials[currentTestimonial].name}</p>
+              <p className="text-gray-500 text-sm">({testimonials[currentTestimonial].location})</p>
             </div>
           </RevealWrapper>
+        </div>
+      </section>
+
+      {/* Partners Section */}
+      <section className="py-12 bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+            {partners.map((partner, index) => (
+              <div key={index} className="grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100">
+                <img src={partner.logo || "/placeholder.svg"} alt={partner.name} className="h-12 w-auto" />
+              </div>
+            ))}
+          </div>
+          <div className="text-right mt-4">
+            <span className="text-teal-500 text-sm font-medium">TOP</span>
+          </div>
         </div>
       </section>
     </>
