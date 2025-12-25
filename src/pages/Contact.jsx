@@ -75,15 +75,41 @@ export default function Contact() {
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    if (!validate()) return
+ const handleSubmit = async (e) => {
+   e.preventDefault();
+   if (!validate()) return;
 
-    setIsSubmitting(true)
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-  }
+   setIsSubmitting(true);
+
+   try {
+     await emailjs.send(
+       import.meta.env.VITE_EMAILJS_SERVICE_ID,
+       import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+       {
+         adults: formData.adults,
+         children: formData.children,
+         arrivalDate: formData.arrivalDate,
+         numDays: formData.numDays,
+         hotelType: formData.hotelType,
+         idealTrip: formData.idealTrip,
+         name: formData.name,
+         email: formData.email,
+         country: formData.country,
+         phone: formData.phone,
+         referralSource: formData.referralSource,
+       },
+       import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+     );
+
+     setIsSubmitted(true);
+   } catch (err) {
+     console.error("EmailJS error:", err);
+     alert("Failed to send enquiry. Please Email us at info@tourismindiamanagement.com");
+   } finally {
+     setIsSubmitting(false);
+   }
+ };
+
 
   if (isSubmitted) {
     return (
