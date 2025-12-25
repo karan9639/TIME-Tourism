@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import Hero from "../components/Hero"
-import RevealWrapper from "../components/RevealWrapper"
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Hero from "../components/Hero";
+import RevealWrapper from "../components/RevealWrapper";
 import {
   ChevronLeft,
   ChevronRight,
@@ -16,7 +16,7 @@ import {
   Calendar,
   X,
 } from "lucide-react";
-import { tourPackagesData } from "../data/tourPackagesData"
+import { tourPackagesData } from "../data/tourPackagesData";
 
 // Destination images grid - matching reference layout
 const destinationImages = [
@@ -76,19 +76,21 @@ const destinationImages = [
     size: "large",
     hasLabel: true,
   },
-]
+];
 
 // Services
 const services = [
   {
     icon: Utensils,
     title: "Restaurants",
-    description: "Experience the culinary & food options available at all throughout the tour",
+    description:
+      "Experience the culinary & food options available at all throughout the tour",
   },
   {
     icon: Camera,
     title: "Sightseeing",
-    description: "Offers best deals on sightseeing packages across various popular sightseeing destinations in India",
+    description:
+      "Offers best deals on sightseeing packages across various popular sightseeing destinations in India",
   },
   {
     icon: ShoppingBag,
@@ -101,7 +103,7 @@ const services = [
     description:
       "We find lodging to fit your vacation style, whether you're looking for five-star luxury or friendly boutique properties",
   },
-]
+];
 
 // Tour packages for carousel
 const tourPackages = [
@@ -110,12 +112,13 @@ const tourPackages = [
   tourPackagesData.find((t) => t.slug === "mystic-kerala"),
   tourPackagesData.find((t) => t.slug === "central-india-wildlife"),
   tourPackagesData.find((t) => t.slug === "golden-triangle-forts-havelis"),
-].filter(Boolean) // Remove any undefined entries
+].filter(Boolean); // Remove any undefined entries
 
 // Testimonials
 const testimonials = [
   {
-    quote: "Good Service & lovely people. You made my trip an excellent experience. Thanks for your help.",
+    quote:
+      "Good Service & lovely people. You made my trip an excellent experience. Thanks for your help.",
     name: "Anthony Woodcock",
     location: "California, USA",
   },
@@ -131,7 +134,7 @@ const testimonials = [
     name: "Sarah Mitchell",
     location: "New York, USA",
   },
-]
+];
 
 // Partner logos
 const partners = [
@@ -145,18 +148,22 @@ const partners = [
 ];
 
 export default function Home() {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
-  const [currentPackageSlide, setCurrentPackageSlide] = useState(0)
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [currentPackageSlide, setCurrentPackageSlide] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, 6000)
-    return () => clearInterval(timer)
-  }, [])
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
 
-  const nextTestimonial = () => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-  const prevTestimonial = () => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+  const nextTestimonial = () =>
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  const prevTestimonial = () =>
+    setCurrentTestimonial(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
 
   return (
     <>
@@ -166,13 +173,16 @@ export default function Home() {
       <section className="py-12 sm:py-16 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealWrapper className="text-center mb-8 sm:mb-12">
-            <p className="text-teal-500 font-script text-lg sm:text-xl mb-2">Personalized Tours</p>
+            <p className="text-teal-500 font-script text-lg sm:text-xl mb-2">
+              Personalized Tours
+            </p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-charcoal mb-3 sm:mb-4">
               For Your Holiday
             </h2>
             <p className="text-gray-600 text-xs sm:text-sm max-w-2xl mx-auto px-4">
-              Customizable All Inclusive Itineraries • Best Deals Guaranteed • Special Early-Bird Offer • Transparent
-              Pricing • 24*7 On-Trip Assistance
+              Customizable All Inclusive Itineraries • Best Deals Guaranteed •
+              Special Early-Bird Offer • Transparent Pricing • 24*7 On-Trip
+              Assistance
             </p>
           </RevealWrapper>
 
@@ -180,7 +190,10 @@ export default function Home() {
             {/* Mobile: Simple 2-column grid */}
             <div className="grid grid-cols-2 gap-2 sm:gap-3 md:hidden">
               {destinationImages.slice(0, 8).map((dest, index) => (
-                <div key={dest.id} className="relative group overflow-hidden rounded-lg aspect-square">
+                <div
+                  key={dest.id}
+                  className="relative group overflow-hidden rounded-lg aspect-square"
+                >
                   <img
                     src={dest.image || "/placeholder.svg"}
                     alt={dest.title}
@@ -285,7 +298,9 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-4 left-4">
-                  <p className="text-white font-script text-xl lg:text-2xl">Holiday</p>
+                  <p className="text-white font-script text-xl lg:text-2xl">
+                    Holiday
+                  </p>
                 </div>
               </div>
 
@@ -299,15 +314,6 @@ export default function Home() {
               </div>
             </div>
           </RevealWrapper>
-
-          <div className="text-right mt-4">
-            <Link
-              to="/tour-packages"
-              className="text-teal-500 text-sm font-medium hover:text-teal-600 transition-colors"
-            >
-              TOP
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -317,15 +323,18 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left - Content */}
             <RevealWrapper>
-              <p className="text-teal-100 font-script text-lg sm:text-xl mb-2">Best Discover</p>
+              <p className="text-teal-100 font-script text-lg sm:text-xl mb-2">
+                Best Discover
+              </p>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-white mb-4 sm:mb-6 leading-tight">
                 CHOOSE A UNIQUE
                 <br />
                 EXPERIENCE
               </h2>
               <p className="text-white/90 leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">
-                We at TIME understand the changing time and demands of travelers and therefore aim to provide all our
-                clients with an experience, which is unprecedented.
+                We at TIME understand the changing time and demands of travelers
+                and therefore aim to provide all our clients with an experience,
+                which is unprecedented.
               </p>
             </RevealWrapper>
 
@@ -340,7 +349,10 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/90 flex items-center justify-center">
-                      <Play size={16} className="sm:w-5 sm:h-5 text-teal-500 ml-0.5" />
+                      <Play
+                        size={16}
+                        className="sm:w-5 sm:h-5 text-teal-500 ml-0.5"
+                      />
                     </div>
                   </div>
                 </div>
@@ -367,9 +379,15 @@ export default function Home() {
               <RevealWrapper key={index} delay={index * 100}>
                 <div className="text-center">
                   <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 mx-auto mb-3 sm:mb-4 flex items-center justify-center">
-                    <service.icon size={32} className="sm:w-9 sm:h-9 lg:w-10 lg:h-10 text-gray-400" strokeWidth={1} />
+                    <service.icon
+                      size={32}
+                      className="sm:w-9 sm:h-9 lg:w-10 lg:h-10 text-gray-400"
+                      strokeWidth={1}
+                    />
                   </div>
-                  <h3 className="font-semibold text-charcoal mb-1 sm:mb-2 text-xs sm:text-sm">{service.title}</h3>
+                  <h3 className="font-semibold text-charcoal mb-1 sm:mb-2 text-xs sm:text-sm">
+                    {service.title}
+                  </h3>
                   <p className="text-gray-500 text-[10px] sm:text-xs leading-relaxed line-clamp-3">
                     {service.description}
                   </p>
@@ -384,18 +402,26 @@ export default function Home() {
       <section className="py-12 sm:py-16 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealWrapper className="text-center mb-8 sm:mb-12">
-            <p className="text-teal-500 font-script text-lg sm:text-xl mb-2">Plan The</p>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-charcoal mb-3 sm:mb-4">Perfect Holiday</h2>
+            <p className="text-teal-500 font-script text-lg sm:text-xl mb-2">
+              Plan The
+            </p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-charcoal mb-3 sm:mb-4">
+              Perfect Holiday
+            </h2>
             <p className="text-gray-600 text-xs sm:text-sm max-w-2xl mx-auto px-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aene an commodo ligula eget dolor. Aenean massa.
-              Cum sociis m.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aene an
+              commodo ligula eget dolor. Aenean massa. Cum sociis m.
             </p>
           </RevealWrapper>
 
           <RevealWrapper delay={200}>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
               {tourPackages.map((tour, index) => (
-                <Link key={tour.id} to={`/tour-packages/${tour.slug}`} className="group block">
+                <Link
+                  key={tour.id}
+                  to={`/tour-packages/${tour.slug}`}
+                  className="group block"
+                >
                   <div className="relative overflow-hidden rounded-lg aspect-[3/4]">
                     <img
                       src={tour.image || "/placeholder.svg"}
@@ -439,15 +465,6 @@ export default function Home() {
               />
             ))}
           </div>
-
-          <div className="text-right mt-4">
-            <Link
-              to="/tour-packages"
-              className="text-teal-500 text-sm font-medium hover:text-teal-600 transition-colors"
-            >
-              TOP
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -485,8 +502,12 @@ export default function Home() {
               </blockquote>
 
               {/* Author */}
-              <p className="font-script text-lg sm:text-xl text-charcoal">{testimonials[currentTestimonial].name}</p>
-              <p className="text-gray-500 text-xs sm:text-sm">({testimonials[currentTestimonial].location})</p>
+              <p className="font-script text-lg sm:text-xl text-charcoal">
+                {testimonials[currentTestimonial].name}
+              </p>
+              <p className="text-gray-500 text-xs sm:text-sm">
+                ({testimonials[currentTestimonial].location})
+              </p>
 
               {/* Mobile navigation dots */}
               <div className="flex justify-center gap-2 mt-4 sm:hidden">
@@ -495,7 +516,9 @@ export default function Home() {
                     key={index}
                     onClick={() => setCurrentTestimonial(index)}
                     className={`w-2 h-2 rounded-full transition-all ${
-                      currentTestimonial === index ? "bg-teal-500" : "bg-gray-300"
+                      currentTestimonial === index
+                        ? "bg-teal-500"
+                        : "bg-gray-300"
                     }`}
                     aria-label={`Go to testimonial ${index + 1}`}
                   />
@@ -510,7 +533,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-12">
             {partners.map((partner, index) => (
-              <div key={index} className="grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100">
+              <div
+                key={index}
+                className="grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100"
+              >
                 <img
                   src={partner.logo || "/placeholder.svg"}
                   alt={partner.name}
@@ -522,5 +548,5 @@ export default function Home() {
         </div>
       </section>
     </>
-  )
+  );
 }
