@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
@@ -112,7 +110,7 @@ const tourPackages = [
   tourPackagesData.find((t) => t.slug === "mystic-kerala"),
   tourPackagesData.find((t) => t.slug === "central-india-wildlife"),
   tourPackagesData.find((t) => t.slug === "golden-triangle-forts-havelis"),
-].filter(Boolean); // Remove any undefined entries
+].filter(Boolean);
 
 // Testimonials
 const testimonials = [
@@ -151,6 +149,10 @@ export default function Home() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [currentPackageSlide, setCurrentPackageSlide] = useState(0);
 
+  // ✅ FIX: Hooks must be inside the component
+  const [open, setOpen] = useState(false);
+
+  // Auto rotate testimonials
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
@@ -158,8 +160,26 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
+  // Close modal on ESC + lock scroll
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   const nextTestimonial = () =>
     setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+
   const prevTestimonial = () =>
     setCurrentTestimonial(
       (prev) => (prev - 1 + testimonials.length) % testimonials.length
@@ -169,7 +189,7 @@ export default function Home() {
     <>
       <Hero />
 
-      {/* Personalized Tours Section - matching reference */}
+      {/* Personalized Tours Section */}
       <section className="py-12 sm:py-16 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealWrapper className="text-center mb-8 sm:mb-12">
@@ -187,9 +207,9 @@ export default function Home() {
           </RevealWrapper>
 
           <RevealWrapper delay={200}>
-            {/* Mobile: Simple 2-column grid */}
+            {/* Mobile grid */}
             <div className="grid grid-cols-2 gap-2 sm:gap-3 md:hidden">
-              {destinationImages.slice(0, 8).map((dest, index) => (
+              {destinationImages.slice(0, 8).map((dest) => (
                 <div
                   key={dest.id}
                   className="relative group overflow-hidden rounded-lg aspect-square"
@@ -200,12 +220,11 @@ export default function Home() {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  {dest.hasLabel && (
+                  {dest.hasLabel ? (
                     <div className="absolute top-2 left-2 bg-teal-500 text-white px-2 py-0.5 rounded text-xs font-medium">
                       {dest.title}
                     </div>
-                  )}
-                  {!dest.hasLabel && (
+                  ) : (
                     <p className="absolute bottom-2 left-2 right-2 text-white text-xs font-medium line-clamp-2">
                       {dest.title}
                     </p>
@@ -214,9 +233,8 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Tablet and up: Complex bento grid */}
+            {/* Desktop grid */}
             <div className="hidden md:grid grid-cols-4 lg:grid-cols-8 gap-3 lg:gap-4">
-              {/* Row 1 */}
               <div className="col-span-2 row-span-2 relative group overflow-hidden rounded-lg">
                 <img
                   src={destinationImages[0].image || "/placeholder.svg"}
@@ -229,66 +247,35 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="col-span-2 relative group overflow-hidden rounded-lg aspect-[4/3]">
-                <img
-                  src={destinationImages[1].image || "/placeholder.svg"}
-                  alt={destinationImages[1].title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <p className="absolute bottom-2 left-2 right-2 text-white text-xs font-medium line-clamp-2">
-                  {destinationImages[1].title}
-                </p>
-              </div>
+              {[1, 2, 3].map((i) => (
+                <div
+                  key={destinationImages[i].id}
+                  className="col-span-2 relative group overflow-hidden rounded-lg aspect-[4/3]"
+                >
+                  <img
+                    src={destinationImages[i].image || "/placeholder.svg"}
+                    alt={destinationImages[i].title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <p className="absolute bottom-2 left-2 right-2 text-white text-xs font-medium line-clamp-2">
+                    {destinationImages[i].title}
+                  </p>
+                </div>
+              ))}
 
-              <div className="col-span-2 relative group overflow-hidden rounded-lg aspect-[4/3]">
-                <img
-                  src={destinationImages[2].image || "/placeholder.svg"}
-                  alt={destinationImages[2].title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <p className="absolute bottom-2 left-2 right-2 text-white text-xs font-medium line-clamp-2">
-                  {destinationImages[2].title}
-                </p>
-              </div>
-
-              <div className="col-span-2 relative group overflow-hidden rounded-lg aspect-[4/3]">
-                <img
-                  src={destinationImages[3].image || "/placeholder.svg"}
-                  alt={destinationImages[3].title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <p className="absolute bottom-2 left-2 right-2 text-white text-xs font-medium line-clamp-2">
-                  {destinationImages[3].title}
-                </p>
-              </div>
-
-              {/* Row 2 */}
-              <div className="col-span-2 relative group overflow-hidden rounded-lg aspect-[4/3]">
-                <img
-                  src={destinationImages[4].image || "/placeholder.svg"}
-                  alt={destinationImages[4].title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-
-              <div className="col-span-2 relative group overflow-hidden rounded-lg aspect-[4/3]">
-                <img
-                  src={destinationImages[5].image || "/placeholder.svg"}
-                  alt={destinationImages[5].title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-
-              <div className="col-span-2 relative group overflow-hidden rounded-lg aspect-[4/3]">
-                <img
-                  src={destinationImages[6].image || "/placeholder.svg"}
-                  alt={destinationImages[6].title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
+              {[4, 5, 6].map((i) => (
+                <div
+                  key={destinationImages[i].id}
+                  className="col-span-2 relative group overflow-hidden rounded-lg aspect-[4/3]"
+                >
+                  <img
+                    src={destinationImages[i].image || "/placeholder.svg"}
+                    alt={destinationImages[i].title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+              ))}
 
               <div className="col-span-2 row-span-2 relative group overflow-hidden rounded-lg">
                 <img
@@ -304,7 +291,6 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Row 3 - Panoramic */}
               <div className="col-span-4 lg:col-span-6 relative group overflow-hidden rounded-lg aspect-[3/1]">
                 <img
                   src="/travel-photography-gallery-collage-india-nepal-bhu.jpg"
@@ -317,11 +303,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Choose a Unique Experience Section - Teal background */}
+      {/* Choose a Unique Experience Section */}
       <section className="py-12 sm:py-16 lg:py-24 bg-teal-500 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Left - Content */}
+            {/* Left */}
             <RevealWrapper>
               <p className="text-teal-100 font-script text-lg sm:text-xl mb-2">
                 Best Discover
@@ -341,9 +327,15 @@ export default function Home() {
             {/* Right - Video/Image Cards */}
             <RevealWrapper delay={200}>
               <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                <div className="relative rounded-lg overflow-hidden aspect-[4/3] group">
+                {/* Video Card */}
+                <button
+                  type="button"
+                  onClick={() => setOpen(true)}
+                  className="relative rounded-lg overflow-hidden aspect-[4/3] group w-full text-left"
+                  aria-label="Play video"
+                >
                   <img
-                    src="/guided-tour-group-rajasthan-palace-luxury-travel.jpg"
+                    src="/image.png"
                     alt="Guided tour"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -355,7 +347,9 @@ export default function Home() {
                       />
                     </div>
                   </div>
-                </div>
+                </button>
+
+                {/* Image Card */}
                 <div className="relative rounded-lg overflow-hidden aspect-[4/3] group">
                   <img
                     src="/luxury-palace-hotel-oberoi-udaivilas-editorial-pho.jpg"
@@ -363,15 +357,48 @@ export default function Home() {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 bg-teal-500 text-white px-2 py-0.5 sm:px-3 sm:py-1 rounded text-[10px] sm:text-xs">
-                    HAUL & LOST SHOW
+                    HAUL &amp; LOST SHOW
                   </div>
                 </div>
               </div>
             </RevealWrapper>
+
+            {/* ✅ Video Modal */}
+            {open && (
+              <div
+                className="fixed inset-0 z-[9999] bg-black/70 flex items-center justify-center p-4"
+                role="dialog"
+                aria-modal="true"
+                onMouseDown={() => setOpen(false)} // click outside closes
+              >
+                <div
+                  className="relative w-full max-w-5xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl"
+                  onMouseDown={(e) => e.stopPropagation()} // keep open when clicking inside
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    className="absolute top-3 right-3 z-[10000] w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg"
+                    aria-label="Close video"
+                  >
+                    <X className="w-5 h-5 text-gray-900" />
+                  </button>
+
+                  <iframe
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/Ks0lWrfuz5Q?autoplay=1&rel=0"
+                    title="TIME Tours Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
+      {/* Services */}
       <section className="py-10 sm:py-12 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
@@ -416,7 +443,7 @@ export default function Home() {
 
           <RevealWrapper delay={200}>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-              {tourPackages.map((tour, index) => (
+              {tourPackages.map((tour) => (
                 <Link
                   key={tour.id}
                   to={`/tour-packages/${tour.slug}`}
@@ -429,7 +456,6 @@ export default function Home() {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                    {/* Duration badge */}
                     <div className="absolute top-2 left-2 sm:top-3 sm:left-3 flex flex-wrap gap-1 sm:gap-2">
                       <span className="bg-teal-500 text-white text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded flex items-center gap-0.5 sm:gap-1">
                         <Calendar size={8} className="sm:w-2.5 sm:h-2.5" />
@@ -468,18 +494,17 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Testimonials */}
       <section className="py-12 sm:py-16 lg:py-20 bg-white border-t border-gray-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealWrapper>
             <div className="relative text-center">
-              {/* Avatar icon */}
               <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-6 sm:mb-8 bg-orange-100 rounded-full flex items-center justify-center">
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-orange-400 rounded-full flex items-center justify-center text-white">
                   <Quote size={20} className="sm:w-6 sm:h-6" />
                 </div>
               </div>
 
-              {/* Navigation arrows - hidden on smallest screens, shown on sm+ */}
               <button
                 onClick={prevTestimonial}
                 className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 items-center justify-center text-gray-400 hover:text-teal-500 transition-colors"
@@ -496,12 +521,10 @@ export default function Home() {
                 <ChevronRight size={24} />
               </button>
 
-              {/* Quote */}
               <blockquote className="text-gray-700 text-base sm:text-lg md:text-xl italic mb-4 sm:mb-6 px-2 sm:px-12">
                 "{testimonials[currentTestimonial].quote}"
               </blockquote>
 
-              {/* Author */}
               <p className="font-script text-lg sm:text-xl text-charcoal">
                 {testimonials[currentTestimonial].name}
               </p>
@@ -509,7 +532,6 @@ export default function Home() {
                 ({testimonials[currentTestimonial].location})
               </p>
 
-              {/* Mobile navigation dots */}
               <div className="flex justify-center gap-2 mt-4 sm:hidden">
                 {testimonials.map((_, index) => (
                   <button
@@ -529,6 +551,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Partners */}
       <section className="py-8 sm:py-10 lg:py-12 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-12">
