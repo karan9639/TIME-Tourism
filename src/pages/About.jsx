@@ -1,25 +1,36 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import PageHeader from "../components/PageHeader"
-import RevealWrapper from "../components/RevealWrapper"
-import { Heart, Award, Users, Leaf, ChevronLeft, ChevronRight, Quote } from "lucide-react"
+import { useState, useEffect } from "react";
+import PageHeader from "../components/PageHeader";
+import RevealWrapper from "../components/RevealWrapper";
+import {
+  Heart,
+  Award,
+  Users,
+  Leaf,
+  ChevronLeft,
+  ChevronRight,
+  Quote,
+} from "lucide-react";
 
 const values = [
   {
     icon: Heart,
     title: "Passion",
-    description: "We are passionate about travel and dedicated to creating experiences that transform and inspire.",
+    description:
+      "We are passionate about travel and dedicated to creating experiences that transform and inspire.",
   },
   {
     icon: Award,
     title: "Excellence",
-    description: "Every detail matters. We strive for excellence in every aspect of our service delivery.",
+    description:
+      "Every detail matters. We strive for excellence in every aspect of our service delivery.",
   },
   {
     icon: Users,
     title: "Partnership",
-    description: "We build lasting relationships with our clients and partners based on trust and mutual respect.",
+    description:
+      "We build lasting relationships with our clients and partners based on trust and mutual respect.",
   },
   {
     icon: Leaf,
@@ -27,7 +38,7 @@ const values = [
     description:
       "We are committed to responsible tourism that benefits local communities and preserves cultural heritage.",
   },
-]
+];
 
 const team = [
   {
@@ -42,7 +53,7 @@ const team = [
     description:
       "Atulya brings fresh perspectives and innovative solutions to ensure seamless travel experiences for all our guests.",
   },
-]
+];
 
 const testimonials = [
   {
@@ -52,11 +63,12 @@ const testimonials = [
     location: "Rome Italy",
   },
   {
-    quote: "Good Service & lovely people. You made my trip an excellent experience. Thanks for your help.",
+    quote:
+      "Good Service & lovely people. You made my trip an excellent experience. Thanks for your help.",
     name: "Anthony Westbrook",
     location: "California USA",
   },
-]
+];
 
 const partners = [
   { name: "Tourism of India", logo: "/tourism-india-logo.jpg" },
@@ -66,55 +78,77 @@ const partners = [
   { name: "TAAI", logo: "/taai-travel-logo.jpg" },
   { name: "SITE", logo: "/site-events-logo.jpg" },
   { name: "PATA", logo: "/pata-asia-travel-logo.jpg" },
-]
+];
 
 export default function About() {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, 6000)
-    return () => clearInterval(timer)
-  }, [])
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
 
-  const nextTestimonial = () => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-  const prevTestimonial = () => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+  const nextTestimonial = () =>
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  const prevTestimonial = () =>
+    setCurrentTestimonial(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
 
   return (
     <>
-      <PageHeader title="About Us" image="/indian-heritage-fort-rajasthan-luxury.jpg" />
+      <PageHeader
+        title="About Us"
+        image="/indian-heritage-fort-rajasthan-luxury.jpg"
+      />
 
       {/* About Time Tours Section */}
       <section className="py-16 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
+            {/* Left: Text */}
             <RevealWrapper>
-              <h2 className="text-3xl md:text-4xl font-serif text-charcoal mb-6">About Time Tours</h2>
-              <div className="space-y-4 text-gray-600 leading-relaxed">
+              <h2 className="text-3xl md:text-4xl font-serif text-charcoal mb-6">
+                About Time Tours
+              </h2>
+
+              <div className="space-y-5 text-gray-600 leading-relaxed max-w-2xl">
                 <p>
-                  In today's world where man and machine are synonyms due to fast growing technology, a holiday has
-                  become a must for us to relax and rejuvenate. The tourism industry, therefore, has become one of the
-                  fast growing industries and is changing its dimensions every minute. We at TIME understand the
-                  changing time and demands of travelers and therefore aim to provide all our clients with an
-                  experience, which is unparalleled.
+                  In today's world where man and machine are synonyms due to
+                  fast growing technology, a holiday has become a must for us to
+                  relax and rejuvenate. The tourism industry, therefore, has
+                  become one of the fast growing industries and is changing its
+                  dimensions every minute. We at TIME understand the changing
+                  time and demands of travelers and therefore aim to provide all
+                  our clients with an experience, which is unparalleled.
                 </p>
+
                 <p>
-                  TIME was established in 1998 with the sole aim of providing quality services viz a viz value for
-                  money. The Indian sub-continent being one of the most challenging destinations requires a lot of
-                  expertise and dedication, therefore we at TIME ensure to provide all our Travel Partners services
-                  which not only make their clients happy but gives us a repeat value.
+                  TIME was established in 1998 with the sole aim of providing
+                  quality services viz a viz value for money. The Indian
+                  sub-continent being one of the most challenging destinations
+                  requires a lot of expertise and dedication, therefore we at
+                  TIME ensure to provide all our Travel Partners services which
+                  not only make their clients happy but gives us a repeat value.
                 </p>
-                <p className="italic">Our motto, "The Company that cares", says it all.</p>
+
+                <p className="italic">
+                  Our motto, "The Company that cares", says it all.
+                </p>
               </div>
             </RevealWrapper>
 
+            {/* Right: Logo */}
             <RevealWrapper delay={200}>
-              <div className="flex justify-center lg:justify-end">
-                <div className="text-center">
-                  <div className="text-6xl md:text-8xl font-bold text-charcoal tracking-wider">TIME</div>
-                  <div className="w-4 h-4 bg-rose-500 rounded-full mx-auto -mt-2"></div>
-                  <p className="text-gray-600 mt-4 italic">The company that cares</p>
+              <div className="flex justify-center lg:justify-end lg:pt-2">
+                <div className="w-full max-w-xs sm:max-w-sm lg:max-w-md flex justify-center lg:justify-end">
+                  <img
+                    src="https://res.cloudinary.com/dptxyo9dy/image/upload/v1766144775/TIME_-_Company-removebg-preview_cejuig.png"
+                    alt="TIME Tours logo"
+                    className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain"
+                  />
                 </div>
               </div>
             </RevealWrapper>
@@ -157,8 +191,12 @@ export default function About() {
               </blockquote>
 
               {/* Author */}
-              <p className="font-script text-xl text-charcoal">{testimonials[currentTestimonial].name}</p>
-              <p className="text-gray-500 text-sm">({testimonials[currentTestimonial].location})</p>
+              <p className="font-script text-xl text-charcoal">
+                {testimonials[currentTestimonial].name}
+              </p>
+              <p className="text-gray-500 text-sm">
+                ({testimonials[currentTestimonial].location})
+              </p>
             </div>
           </RevealWrapper>
         </div>
@@ -169,8 +207,15 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
             {partners.map((partner, index) => (
-              <div key={index} className="grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100">
-                <img src={partner.logo || "/placeholder.svg"} alt={partner.name} className="h-12 w-auto" />
+              <div
+                key={index}
+                className="grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100"
+              >
+                <img
+                  src={partner.logo || "/placeholder.svg"}
+                  alt={partner.name}
+                  className="h-12 w-auto"
+                />
               </div>
             ))}
           </div>
@@ -180,5 +225,5 @@ export default function About() {
         </div>
       </section>
     </>
-  )
+  );
 }
