@@ -1,9 +1,10 @@
 "use client"
 
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import PageHeader from "../components/PageHeader"
 import RevealWrapper from "../components/RevealWrapper"
-import { Plus, Minus, Calendar } from "lucide-react"
+import { Plus, Minus, Calendar, ArrowRight } from "lucide-react"
 
 const faqs = [
   {
@@ -103,6 +104,7 @@ const faqs = [
 const sidebarTours = [
   {
     id: 1,
+    slug: "golden-triangle",
     title: "Golden Triangle",
     description: "The itinerary covers the famous cities of Delhi, Agra & Jaipur.",
     image: "/taj-mahal-india-luxury-travel-editorial-golden-hou.jpg",
@@ -111,6 +113,7 @@ const sidebarTours = [
   },
   {
     id: 2,
+    slug: "rajasthan-land-of-maharajas",
     title: "Rajasthan Tour – The Land of Maharajas",
     description:
       "Delhi, the Empress of Indian cities has a fascinating history and a stimulating present. She has often been sacked and left naked and desolate. But she could not be despoiled of the incomparable situation that marks her for the metropolis of a Great Empire. The capital of India, Delhi has been the seat of power...",
@@ -145,25 +148,56 @@ function FAQItem({ faq, isOpen, onToggle }) {
 }
 
 function SidebarTourCard({ tour }) {
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate(`/tour-packages/${tour.slug}`)
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault()
+      handleClick()
+    }
+  }
+
   return (
-    <div className="bg-white rounded-lg overflow-hidden shadow-sm mb-6">
+    <div
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
+      aria-label={`View ${tour.title} tour details`}
+      className="bg-white rounded-lg overflow-hidden shadow-sm mb-6 cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 group"
+    >
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={tour.image || "/placeholder.svg"}
           alt={tour.title}
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <div className="absolute bottom-3 left-3 flex gap-2">
-          <span className="bg-teal-500 text-white text-xs px-2 py-1 rounded flex items-center gap-1">
+          <span className="bg-teal-500 text-white text-xs px-2 py-1 rounded flex items-center gap-1 shadow-md">
             <Calendar size={12} />
             {tour.days} Days
           </span>
-          <span className="bg-coral-500 text-white text-xs px-2 py-1 rounded">{tour.location}</span>
+          <span className="bg-coral-500 text-white text-xs px-2 py-1 rounded shadow-md">{tour.location}</span>
+        </div>
+        <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+          <ArrowRight size={16} className="text-teal-600" />
         </div>
       </div>
       <div className="p-4">
-        <h3 className="font-semibold text-charcoal mb-2">{tour.title}</h3>
-        <p className="text-gray-600 text-sm line-clamp-4">{tour.description}</p>
+        <h3 className="font-semibold text-charcoal mb-2 group-hover:text-teal-600 transition-colors duration-300">
+          {tour.title}
+        </h3>
+        <p className="text-gray-600 text-sm line-clamp-4 leading-relaxed">{tour.description}</p>
+        <div className="mt-3 flex items-center text-teal-600 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0">
+          View Details
+          <ArrowRight size={14} className="ml-1" />
+        </div>
       </div>
     </div>
   )

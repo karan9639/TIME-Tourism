@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import Hero from "../components/Hero"
 import RevealWrapper from "../components/RevealWrapper"
 import { ChevronLeft, ChevronRight, Quote, Utensils, Camera, ShoppingBag, Building, Play, Calendar } from "lucide-react"
+import { tourPackagesData } from "../data/tourPackagesData"
 
 // Destination images grid - matching reference layout
 const destinationImages = [
@@ -93,52 +94,12 @@ const services = [
 
 // Tour packages for carousel
 const tourPackages = [
-  {
-    id: 1,
-    slug: "golden-triangle",
-    title: "Golden Triangle",
-    description: "The itinerary cover the famous cities of Delhi, Agra & Jaipur.",
-    duration: "6 Days",
-    image: "/taj-mahal-india-luxury-travel-editorial-golden-hou.jpg",
-    category: "India",
-  },
-  {
-    id: 2,
-    slug: "rajasthan-tour",
-    title: "Rajasthan Tour - The Land of Maharajas",
-    description: "Delhi, the Empress of Indian cities has a fascinating history and...",
-    duration: "12 Days",
-    image: "/jaipur-palace-rajasthan-pink-city-architecture.jpg",
-    category: "India",
-  },
-  {
-    id: 3,
-    slug: "mystic-kerala-tour",
-    title: "Mystic Kerala Tour",
-    description: "Cochin, originally built by the Portuguese, has a natural harbor with...",
-    duration: "9 Days",
-    image: "/kerala-backwaters-houseboat-india-sunset.jpg",
-    category: "India",
-  },
-  {
-    id: 4,
-    slug: "central-india-wildlife",
-    title: "Central India Wildlife",
-    description: "The area occupied by Mumbai three hundred years...",
-    duration: "08 Days",
-    image: "/tiger-safari-india-wildlife-jungle.jpg",
-    category: "India",
-  },
-  {
-    id: 5,
-    slug: "golden-triangle-with-forts",
-    title: "Golden Triangle With Forts and Havelis",
-    description: "Delhi, the Empress of Indian cities has a fascinating history and...",
-    duration: "06 Days",
-    image: "/indian-heritage-fort-rajasthan-luxury.jpg",
-    category: "India",
-  },
-]
+  tourPackagesData.find((t) => t.slug === "golden-triangle"),
+  tourPackagesData.find((t) => t.slug === "rajasthan-land-of-maharajas"),
+  tourPackagesData.find((t) => t.slug === "mystic-kerala"),
+  tourPackagesData.find((t) => t.slug === "central-india-wildlife"),
+  tourPackagesData.find((t) => t.slug === "golden-triangle-forts-havelis"),
+].filter(Boolean) // Remove any undefined entries
 
 // Testimonials
 const testimonials = [
