@@ -1,10 +1,11 @@
-"use client"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import RevealWrapper from "../components/RevealWrapper";
+import { Plus, Minus, Calendar, ArrowRight } from "lucide-react";
 
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import PageHeader from "../components/PageHeader"
-import RevealWrapper from "../components/RevealWrapper"
-import { Plus, Minus, Calendar, ArrowRight } from "lucide-react"
+// If you deploy under a subpath, this keeps /public assets working (Vite compatible).
+const BASE_URL = (import.meta?.env?.BASE_URL ?? "/").replace(/\/$/, "");
+const asset = (p) => `${BASE_URL}${p.startsWith("/") ? p : `/${p}`}`;
 
 const faqs = [
   {
@@ -69,7 +70,8 @@ const faqs = [
   },
   {
     id: 8,
-    question: "What is the best thing to do if pestered by beggars and street urchins?",
+    question:
+      "What is the best thing to do if pestered by beggars and street urchins?",
     answer: {
       content:
         "It's best to politely decline and walk away. Avoid engaging or giving money as it encourages the practice. Instead, consider donating to established charities that help underprivileged communities.",
@@ -99,15 +101,16 @@ const faqs = [
         "Tipping is customary in India. A tip of 10-15% is appropriate at restaurants if service charge is not included. For hotel staff, Rs. 50-100 per service is standard. Always carry small denominations for tipping.",
     },
   },
-]
+];
 
 const sidebarTours = [
   {
     id: 1,
     slug: "golden-triangle",
     title: "Golden Triangle",
-    description: "The itinerary covers the famous cities of Delhi, Agra & Jaipur.",
-    image: "/taj-mahal-india-luxury-travel-editorial-golden-hou.jpg",
+    description:
+      "The itinerary covers the famous cities of Delhi, Agra & Jaipur.",
+    image: asset("/taj-mahal-india-luxury-travel-editorial-golden-hou.jpg"),
     days: 6,
     location: "India",
   },
@@ -117,11 +120,11 @@ const sidebarTours = [
     title: "Rajasthan Tour – The Land of Maharajas",
     description:
       "Delhi, the Empress of Indian cities has a fascinating history and a stimulating present. She has often been sacked and left naked and desolate. But she could not be despoiled of the incomparable situation that marks her for the metropolis of a Great Empire. The capital of India, Delhi has been the seat of power...",
-    image: "/indian-heritage-fort-rajasthan-luxury.jpg",
+    image: asset("/indian-heritage-fort-rajasthan-luxury.jpg"),
     days: 13,
     location: "India",
   },
-]
+];
 
 function FAQItem({ faq, isOpen, onToggle }) {
   return (
@@ -131,36 +134,47 @@ function FAQItem({ faq, isOpen, onToggle }) {
         className="w-full py-4 flex items-center justify-between text-left hover:text-teal-600 transition-colors"
       >
         <span className="font-medium text-charcoal flex items-center gap-3">
-          <span className="text-teal-500">{isOpen ? <Minus size={18} /> : <Plus size={18} />}</span>
+          <span className="text-teal-500">
+            {isOpen ? <Minus size={18} /> : <Plus size={18} />}
+          </span>
           {faq.question}
         </span>
       </button>
+
       {isOpen && (
         <div className="pb-4 pl-9 text-gray-600 text-sm leading-relaxed">
-          {faq.answer.title && <h4 className="font-semibold text-charcoal mb-2">{faq.answer.title}</h4>}
+          {faq.answer.title && (
+            <h4 className="font-semibold text-charcoal mb-2">
+              {faq.answer.title}
+            </h4>
+          )}
           <p className="mb-4">{faq.answer.content}</p>
-          {faq.answer.subtitle && <h4 className="font-semibold text-charcoal mb-2">{faq.answer.subtitle}</h4>}
+          {faq.answer.subtitle && (
+            <h4 className="font-semibold text-charcoal mb-2">
+              {faq.answer.subtitle}
+            </h4>
+          )}
           {faq.answer.subcontent && <p>{faq.answer.subcontent}</p>}
         </div>
       )}
     </div>
-  )
+  );
 }
 
 function SidebarTourCard({ tour }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/tour-packages/${tour.slug}`)
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+    navigate(`/tour-packages/${tour.slug}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault()
-      handleClick()
+      e.preventDefault();
+      handleClick();
     }
-  }
+  };
 
   return (
     <div
@@ -173,9 +187,12 @@ function SidebarTourCard({ tour }) {
     >
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
-          src={tour.image || "/placeholder.svg"}
+          src={tour.image || asset("/placeholder.svg")}
           alt={tour.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          onError={(e) => {
+            e.currentTarget.src = asset("/placeholder.svg");
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <div className="absolute bottom-3 left-3 flex gap-2">
@@ -183,39 +200,83 @@ function SidebarTourCard({ tour }) {
             <Calendar size={12} />
             {tour.days} Days
           </span>
-          <span className="bg-coral-500 text-white text-xs px-2 py-1 rounded shadow-md">{tour.location}</span>
+          <span className="bg-coral-500 text-white text-xs px-2 py-1 rounded shadow-md">
+            {tour.location}
+          </span>
         </div>
         <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
           <ArrowRight size={16} className="text-teal-600" />
         </div>
       </div>
+
       <div className="p-4">
         <h3 className="font-semibold text-charcoal mb-2 group-hover:text-teal-600 transition-colors duration-300">
           {tour.title}
         </h3>
-        <p className="text-gray-600 text-sm line-clamp-4 leading-relaxed">{tour.description}</p>
+        <p className="text-gray-600 text-sm line-clamp-4 leading-relaxed">
+          {tour.description}
+        </p>
         <div className="mt-3 flex items-center text-teal-600 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0">
           View Details
           <ArrowRight size={14} className="ml-1" />
         </div>
       </div>
     </div>
-  )
+  );
+}
+
+function FAQHeader({ title, images }) {
+  return (
+    <section className="relative h-[320px] sm:h-[380px] lg:h-[460px] overflow-hidden">
+      {/* 2x2 collage */}
+      <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
+        {images.map((src, i) => (
+          <img
+            key={i}
+            src={src}
+            alt={`${title} header ${i + 1}`}
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              // If filename is wrong, you'll see placeholder instead of gray.
+              e.currentTarget.src = asset("/placeholder.svg");
+            }}
+          />
+        ))}
+      </div>
+
+      {/* overlays */}
+      <div className="absolute inset-0 bg-black/35" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/35" />
+
+      {/* title */}
+      <div className="relative h-full flex items-center justify-center px-4">
+        <div className="text-center">
+          <div className="text-white/80 tracking-widest uppercase text-sm mb-2">
+            Time Tours
+          </div>
+          <h1 className="text-white text-4xl sm:text-5xl font-serif drop-shadow">
+            {title}
+          </h1>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default function FAQs() {
-  const [openFAQ, setOpenFAQ] = useState(1)
+  const [openFAQ, setOpenFAQ] = useState(1);
 
+  // IMPORTANT: These filenames MUST exactly match your /public filenames.
   const headerImages = [
-    "/taj-mahal-india-luxury-travel-editorial-golden-hou.jpg",
-    "/indian-heritage-fort-rajasthan-luxury.jpg",
-    "/varanasi-ghats-sunrise-india-spiritual-travel-phot.jpg",
-    "/yoga-retreat-kerala-wellness-spa.jpg",
-  ]
+    asset("/taj-mahal-india-luxury-travel-editorial-golden-hou.jpg"),
+    asset("/indian-heritage-fort-rajasthan-luxury.jpg"),
+    asset("/varanasi-ghats-sunrise-india-spiritual-travel-phot.jpg"),
+    asset("/yoga-retreat-kerala-wellness-spa.jpg"),
+  ];
 
   return (
     <>
-      <PageHeader title="FAQ" image={headerImages} variant="collage" />
+      <FAQHeader title="FAQ" images={headerImages} />
 
       <section className="py-16 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -223,14 +284,18 @@ export default function FAQs() {
             {/* FAQ Column */}
             <div className="lg:col-span-2">
               <RevealWrapper>
-                <h2 className="text-2xl md:text-3xl font-serif text-charcoal mb-8">Frequently Asked Questions</h2>
+                <h2 className="text-2xl md:text-3xl font-serif text-charcoal mb-8">
+                  Frequently Asked Questions
+                </h2>
                 <div className="space-y-0">
                   {faqs.map((faq) => (
                     <FAQItem
                       key={faq.id}
                       faq={faq}
                       isOpen={openFAQ === faq.id}
-                      onToggle={() => setOpenFAQ(openFAQ === faq.id ? null : faq.id)}
+                      onToggle={() =>
+                        setOpenFAQ(openFAQ === faq.id ? null : faq.id)
+                      }
                     />
                   ))}
                 </div>
@@ -249,5 +314,5 @@ export default function FAQs() {
         </div>
       </section>
     </>
-  )
+  );
 }
