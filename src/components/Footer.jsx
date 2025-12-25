@@ -22,6 +22,7 @@ const quickLinks = [
   { name: "FAQ's", path: "/faqs" },
   { name: "Testimonials", path: "/testimonials" },
   { name: "Stories", path: "/stories" },
+  { name: "Contact Us", path: "/contact" },
 ];
 
 export default function Footer() {
