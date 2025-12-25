@@ -479,18 +479,7 @@ export default function Home() {
             </div>
           </RevealWrapper>
 
-          {/* Carousel dots */}
-          <div className="flex justify-center gap-2 mt-6 sm:mt-8">
-            {[0, 1, 2].map((dot) => (
-              <button
-                key={dot}
-                onClick={() => setCurrentPackageSlide(dot)}
-                className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all ${
-                  currentPackageSlide === dot ? "bg-teal-500" : "bg-gray-300"
-                }`}
-              />
-            ))}
-          </div>
+          
         </div>
       </section>
 
