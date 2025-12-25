@@ -98,10 +98,6 @@ export default function TourPackages() {
               </RevealWrapper>
             ))}
           </div>
-
-          <div className="text-right mt-4 sm:mt-6">
-            <span className="text-teal-500 text-sm font-medium cursor-pointer hover:text-teal-600">TOP</span>
-          </div>
         </div>
       </section>
 
@@ -115,10 +111,6 @@ export default function TourPackages() {
                   <HolidayTourCard tour={tour} />
                 </RevealWrapper>
               ))}
-            </div>
-
-            <div className="text-right mt-4 sm:mt-6">
-              <span className="text-teal-500 text-sm font-medium cursor-pointer hover:text-teal-600">TOP</span>
             </div>
           </div>
         </section>
