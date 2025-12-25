@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import PageHeader from "../components/PageHeader"
-import RevealWrapper from "../components/RevealWrapper"
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
+import { useState, useEffect } from "react";
+import PageHeader from "../components/PageHeader";
+import RevealWrapper from "../components/RevealWrapper";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 const testimonials = [
   {
@@ -15,7 +15,8 @@ const testimonials = [
   },
   {
     id: 2,
-    quote: "Good Service & lovely people. You made my trip an excellent experience. Thanks for your help.",
+    quote:
+      "Good Service & lovely people. You made my trip an excellent experience. Thanks for your help.",
     name: "Anthony Westbrook",
     location: "California USA",
   },
@@ -40,34 +41,41 @@ const testimonials = [
     name: "Maria Santos",
     location: "Luxury Travel Advisor, Spain",
   },
-]
+];
 
 const partners = [
-  { name: "Tourism of India", logo: "/tourism-india-logo.jpg" },
-  { name: "IATO", logo: "/iato-travel-logo.jpg" },
-  { name: "ASTA", logo: "/asta-travel-logo.jpg" },
-  { name: "USTOA", logo: "/ustoa-travel-logo.jpg" },
-  { name: "TAAI", logo: "/taai-travel-logo.jpg" },
-  { name: "SITE", logo: "/site-events-logo.jpg" },
-  { name: "PATA", logo: "/pata-asia-travel-logo.jpg" },
-]
+  { name: "Tourism of India", logo: "/India-Tourism-Logo-1.png" },
+  { name: "IATO", logo: "/IATO-LOGO-1.png" },
+  { name: "ASTA", logo: "/ASTA-logo-1.jpg" },
+  { name: "USTOA", logo: "/USTOA-Logo-1.jpeg" },
+  { name: "TAAI", logo: "/TAAI-Logo-1.png" },
+  { name: "SITE", logo: "/Site-Logo-1.jpg" },
+  { name: "PATA", logo: "/PATA-Logo.jpg" },
+];
 
 export default function Testimonials() {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, 6000)
-    return () => clearInterval(timer)
-  }, [])
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
 
-  const nextTestimonial = () => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-  const prevTestimonial = () => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+  const nextTestimonial = () =>
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  const prevTestimonial = () =>
+    setCurrentTestimonial(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
 
   return (
     <>
-      <PageHeader title="Testimonials" image="/yoga-retreat-kerala-wellness-spa.jpg" />
+      <PageHeader
+        title="Testimonials"
+        image="/yoga-retreat-kerala-wellness-spa.jpg"
+      />
 
       {/* Testimonials Carousel */}
       <section className="py-16 lg:py-20 bg-white">
@@ -103,8 +111,12 @@ export default function Testimonials() {
                 <blockquote className="text-lg md:text-xl text-gray-700 italic mb-6 min-h-[120px]">
                   "{testimonials[currentTestimonial].quote}"
                 </blockquote>
-                <p className="font-script text-2xl text-charcoal">{testimonials[currentTestimonial].name}</p>
-                <p className="text-gray-500 text-sm">({testimonials[currentTestimonial].location})</p>
+                <p className="font-script text-2xl text-charcoal">
+                  {testimonials[currentTestimonial].name}
+                </p>
+                <p className="text-gray-500 text-sm">
+                  ({testimonials[currentTestimonial].location})
+                </p>
               </div>
 
               {/* Carousel Dots */}
@@ -114,7 +126,9 @@ export default function Testimonials() {
                     key={index}
                     onClick={() => setCurrentTestimonial(index)}
                     className={`w-3 h-3 rounded-full transition-colors ${
-                      index === currentTestimonial ? "bg-teal-500" : "bg-gray-300"
+                      index === currentTestimonial
+                        ? "bg-teal-500"
+                        : "bg-gray-300"
                     }`}
                     aria-label={`Go to testimonial ${index + 1}`}
                   />
@@ -130,16 +144,20 @@ export default function Testimonials() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
             {partners.map((partner, index) => (
-              <div key={index} className="grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100">
-                <img src={partner.logo || "/placeholder.svg"} alt={partner.name} className="h-12 w-auto" />
+              <div
+                key={index}
+                className="grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100"
+              >
+                <img
+                  src={partner.logo || "/placeholder.svg"}
+                  alt={partner.name}
+                  className="h-12 w-auto"
+                />
               </div>
             ))}
-          </div>
-          <div className="text-right mt-4">
-            <span className="text-teal-500 text-sm font-medium">TOP</span>
           </div>
         </div>
       </section>
     </>
-  )
+  );
 }

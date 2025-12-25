@@ -71,13 +71,13 @@ const testimonials = [
 ];
 
 const partners = [
-  { name: "Tourism of India", logo: "/tourism-india-logo.jpg" },
-  { name: "IATO", logo: "/iato-travel-logo.jpg" },
-  { name: "ASTA", logo: "/asta-travel-logo.jpg" },
-  { name: "USTOA", logo: "/ustoa-travel-logo.jpg" },
-  { name: "TAAI", logo: "/taai-travel-logo.jpg" },
-  { name: "SITE", logo: "/site-events-logo.jpg" },
-  { name: "PATA", logo: "/pata-asia-travel-logo.jpg" },
+  { name: "Tourism of India", logo: "/India-Tourism-Logo-1.png" },
+  { name: "IATO", logo: "/IATO-LOGO-1.png" },
+  { name: "ASTA", logo: "/ASTA-logo-1.jpg" },
+  { name: "USTOA", logo: "/USTOA-Logo-1.jpeg" },
+  { name: "TAAI", logo: "/TAAI-Logo-1.png" },
+  { name: "SITE", logo: "/Site-Logo-1.jpg" },
+  { name: "PATA", logo: "/PATA-Logo.jpg" },
 ];
 
 export default function About() {
@@ -92,6 +92,7 @@ export default function About() {
 
   const nextTestimonial = () =>
     setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+
   const prevTestimonial = () =>
     setCurrentTestimonial(
       (prev) => (prev - 1 + testimonials.length) % testimonials.length
@@ -105,16 +106,20 @@ export default function About() {
       />
 
       {/* About Time Tours Section */}
-      <section className="py-16 lg:py-20 bg-white">
+      <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
+          {/* Make the logo column a fixed width on desktop (like your old site) */}
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_520px] xl:grid-cols-[minmax(0,1fr)_600px] gap-10 lg:gap-16 items-start">
             {/* Left: Text */}
             <RevealWrapper>
-              <h2 className="text-3xl md:text-4xl font-serif text-charcoal mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold text-charcoal leading-tight">
                 About Time Tours
               </h2>
 
-              <div className="space-y-5 text-gray-600 leading-relaxed max-w-2xl">
+              {/* small underline similar feel to old layout */}
+              <div className="mt-4 mb-8 h-1 w-16 bg-teal-500" />
+
+              <div className="space-y-6 text-gray-600 leading-relaxed max-w-2xl">
                 <p>
                   In today's world where man and machine are synonyms due to
                   fast growing technology, a holiday has become a must for us to
@@ -140,14 +145,21 @@ export default function About() {
               </div>
             </RevealWrapper>
 
-            {/* Right: Logo */}
+            {/* Right: Logo (bigger + top-right like old site) */}
             <RevealWrapper delay={200}>
-              <div className="flex justify-center lg:justify-end lg:pt-2">
-                <div className="w-full max-w-xs sm:max-w-sm lg:max-w-md flex justify-center lg:justify-end">
+              <div className="flex justify-center lg:justify-end">
+                <div className="w-full flex justify-center lg:justify-end">
                   <img
                     src="https://res.cloudinary.com/dptxyo9dy/image/upload/v1766144775/TIME_-_Company-removebg-preview_cejuig.png"
                     alt="TIME Tours logo"
-                    className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain"
+                    className="
+                      w-full
+                      max-w-[420px] sm:max-w-[460px] lg:max-w-[520px] xl:max-w-[600px]
+                      h-auto
+                      object-contain
+                      mt-2 lg:mt-1
+                    "
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -161,14 +173,12 @@ export default function About() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <RevealWrapper>
             <div className="relative text-center">
-              {/* Avatar icon */}
               <div className="w-20 h-20 mx-auto mb-8 bg-orange-100 rounded-full flex items-center justify-center">
                 <div className="w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center text-white">
                   <Quote size={24} />
                 </div>
               </div>
 
-              {/* Navigation arrows */}
               <button
                 onClick={prevTestimonial}
                 className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-gray-400 hover:text-teal-500 transition-colors"
@@ -185,12 +195,10 @@ export default function About() {
                 <ChevronRight size={24} />
               </button>
 
-              {/* Quote */}
               <blockquote className="text-gray-700 text-lg md:text-xl italic mb-6 px-12">
                 "{testimonials[currentTestimonial].quote}"
               </blockquote>
 
-              {/* Author */}
               <p className="font-script text-xl text-charcoal">
                 {testimonials[currentTestimonial].name}
               </p>
@@ -215,12 +223,10 @@ export default function About() {
                   src={partner.logo || "/placeholder.svg"}
                   alt={partner.name}
                   className="h-12 w-auto"
+                  loading="lazy"
                 />
               </div>
             ))}
-          </div>
-          <div className="text-right mt-4">
-            <span className="text-teal-500 text-sm font-medium">TOP</span>
           </div>
         </div>
       </section>

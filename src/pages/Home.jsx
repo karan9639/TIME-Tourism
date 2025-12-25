@@ -4,7 +4,18 @@ import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import Hero from "../components/Hero"
 import RevealWrapper from "../components/RevealWrapper"
-import { ChevronLeft, ChevronRight, Quote, Utensils, Camera, ShoppingBag, Building, Play, Calendar } from "lucide-react"
+import {
+  ChevronLeft,
+  ChevronRight,
+  Quote,
+  Utensils,
+  Camera,
+  ShoppingBag,
+  Building,
+  Play,
+  Calendar,
+  X,
+} from "lucide-react";
 import { tourPackagesData } from "../data/tourPackagesData"
 
 // Destination images grid - matching reference layout
@@ -124,14 +135,14 @@ const testimonials = [
 
 // Partner logos
 const partners = [
-  { name: "Tourism of India", logo: "/tourism-india-logo.jpg" },
-  { name: "IATO", logo: "/iato-travel-logo.jpg" },
-  { name: "ASTA", logo: "/asta-travel-logo.jpg" },
-  { name: "USTOA", logo: "/ustoa-travel-logo.jpg" },
-  { name: "TAAI", logo: "/taai-travel-logo.jpg" },
-  { name: "SITE", logo: "/site-events-logo.jpg" },
-  { name: "PATA", logo: "/pata-asia-travel-logo.jpg" },
-]
+  { name: "Tourism of India", logo: "/India-Tourism-Logo-1.png" },
+  { name: "IATO", logo: "/IATO-LOGO-1.png" },
+  { name: "ASTA", logo: "/ASTA-logo-1.jpg" },
+  { name: "USTOA", logo: "/USTOA-Logo-1.jpeg" },
+  { name: "TAAI", logo: "/TAAI-Logo-1.png" },
+  { name: "SITE", logo: "/Site-Logo-1.jpg" },
+  { name: "PATA", logo: "/PATA-Logo.jpg" },
+];
 
 export default function Home() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
@@ -316,9 +327,6 @@ export default function Home() {
                 We at TIME understand the changing time and demands of travelers and therefore aim to provide all our
                 clients with an experience, which is unprecedented.
               </p>
-              <div className="text-right">
-                <span className="text-white/70 text-sm">TOP</span>
-              </div>
             </RevealWrapper>
 
             {/* Right - Video/Image Cards */}
@@ -368,9 +376,6 @@ export default function Home() {
                 </div>
               </RevealWrapper>
             ))}
-          </div>
-          <div className="text-right mt-4">
-            <span className="text-teal-500 text-sm font-medium">TOP</span>
           </div>
         </div>
       </section>
@@ -513,9 +518,6 @@ export default function Home() {
                 />
               </div>
             ))}
-          </div>
-          <div className="text-right mt-4">
-            <span className="text-teal-500 text-sm font-medium">TOP</span>
           </div>
         </div>
       </section>
