@@ -198,12 +198,30 @@ export default function Contact() {
                 </div>
 
                 {/* Image */}
-                <div className="rounded-lg overflow-hidden">
-                  <img
-                    src="/yoga-retreat-kerala-wellness-spa.jpg"
-                    alt="Kerala Backwaters"
-                    className="w-full h-64 object-cover"
-                  />
+                {/* Images */}
+                <div className="space-y-4">
+                  {" "}
+                  {/* change 4 to 2 or 6 as you like */}
+                  <div className="relative overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5">
+                    <img
+                      src="/maldives-overwater-villa-turquoise-ocean.jpg"
+                      alt="Kerala wellness retreat"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full aspect-[16/10] object-cover"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0" />
+                  </div>
+                  <div className="relative overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5">
+                    <img
+                      src="/yoga-retreat-kerala-wellness-spa.jpg"
+                      alt="Kerala wellness retreat"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full aspect-[16/10] object-cover"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0" />
+                  </div>
                 </div>
               </div>
             </RevealWrapper>
